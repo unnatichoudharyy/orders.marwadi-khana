@@ -133,7 +133,7 @@ window.MENU = [
       { id: "atta-laddu", images: ["images/atta-laddu.webp"], name: "Atta Laddu", desc: "Whole-wheat atta laddu.", shelfLife: "15 days", price: 1500, unit: "kg", veg: true, emoji: "🟤", options: [LADDU_BOX] },
       { id: "nariyal-laddu", images: ["images/nariyal-laddu.webp"], name: "Nariyal Laddu", desc: "Coconut laddu.", shelfLife: "7 days", price: 1500, unit: "kg", veg: true, emoji: "🥥", options: [LADDU_BOX] },
       { id: "moti-boondi-laddu", images: ["images/moti-boondi-laddu.webp"], name: "Moti Boondi Laddu", desc: "Moti boondi laddu.", shelfLife: "3 days", price: 1500, unit: "kg", veg: true, emoji: "🟠", options: [LADDU_BOX] },
-      { id: "assorted-laddu-box", name: "Assorted Laddu Box", desc: "A mix of our laddus in one box.", shelfLife: "7 days", price: 1600, unit: "kg", veg: true, emoji: "🎁", options: [LADDU_BOX] },
+      { id: "assorted-laddu-box", images: ["images/assorted-laddu-box.webp"], name: "Assorted Laddu Box", desc: "A mix of our laddus in one box.", shelfLife: "7 days", price: 1600, unit: "kg", veg: true, emoji: "🎁", options: [LADDU_BOX] },
       { id: "dry-fruit-laddu", images: ["images/dry-fruit-laddu.webp"], name: "Dry Fruit Laddu", desc: "Dry fruit laddu.", shelfLife: "15 days", price: 2500, unit: "kg", veg: true, emoji: "🌰", options: [LADDU_BOX] }
     ]
   },
