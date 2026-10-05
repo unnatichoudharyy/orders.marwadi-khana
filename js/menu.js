@@ -20,6 +20,7 @@
 //             price on a choice is added to the base price;
 //             factor on a choice scales it (e.g. factor: 0.5 for half a kg)
 //   unit      optional, shown after the price: "kg" → "1,500 / kg"
+//   shelfLife optional, e.g. "7 days" — shown on the card and item page
 // ---------------------------------------------------------------------------
 
 const WEIGHT = (half, kg) => ({
@@ -140,9 +141,9 @@ window.MENU = [
     id: "burfi",
     name: "Burfi (Per Kg)",
     items: [
-      { id: "besan-burfi", name: "Besan Burfi", desc: "Besan burfi. Priced per kg.", price: 1500, unit: "kg", veg: true, emoji: "🟨" },
-      { id: "moong-dal-burfi", name: "Moong Dal Burfi", desc: "Moong dal burfi. Priced per kg.", price: 1500, unit: "kg", veg: true, emoji: "🟧" },
-      { id: "kalakand", name: "Kalakand", desc: "Milk-based kalakand. Priced per kg.", price: 1800, unit: "kg", veg: true, emoji: "⬜", badge: "POPULAR" },
+      { id: "besan-burfi", name: "Besan Burfi", desc: "Besan burfi. Priced per kg.", shelfLife: "7 days", price: 1500, unit: "kg", veg: true, emoji: "🟨" },
+      { id: "moong-dal-burfi", name: "Moong Dal Burfi", desc: "Moong dal burfi. Priced per kg.", shelfLife: "7 days", price: 1500, unit: "kg", veg: true, emoji: "🟧" },
+      { id: "kalakand", name: "Kalakand", desc: "Milk-based kalakand. Priced per kg.", shelfLife: "3–4 days", price: 1800, unit: "kg", veg: true, emoji: "⬜", badge: "POPULAR" },
       { id: "mango-kalakand", name: "Mango Kalakand", desc: "Kalakand with mango. Priced per kg.", price: 2000, unit: "kg", veg: true, emoji: "🥭", badge: "NEW" }
     ]
   },

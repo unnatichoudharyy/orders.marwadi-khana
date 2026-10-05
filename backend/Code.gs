@@ -12,7 +12,7 @@
 
 const INVENTORY_TAB = "Inventory";
 const ORDERS_TAB = "Orders";
-const INVENTORY_HEADERS = ["id", "name", "category", "description", "price", "stock", "available", "badge", "image"];
+const INVENTORY_HEADERS = ["id", "name", "category", "description", "price", "stock", "available", "badge", "image", "shelf_life"];
 const ORDER_HEADERS = [
   "Placed at", "Order ID", "Status", "Delivery slot", "Name", "Phone", "Email",
   "Address", "Landmark", "Map link", "Items", "Item total", "Delivery", "Tax", "To pay", "Payment", "Notes"
@@ -114,7 +114,8 @@ function readInventory_() {
       stock: stock,
       available: isYes_(cell_(r, col.available)),
       badge: String(cell_(r, col.badge)).trim(),
-      image: String(cell_(r, col.image)).trim()
+      image: String(cell_(r, col.image)).trim(),
+      shelf_life: String(cell_(r, col.shelf_life)).trim()
     };
     items.push(item);
     byId[id] = Object.assign({ row: i + 2 }, item);
