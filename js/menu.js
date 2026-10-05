@@ -108,7 +108,7 @@ window.MENU = [
     items: [
       { id: "besan-halwa", name: "Besan Halwa", desc: "Classic besan halwa. Priced per kg.", price: 1500, unit: "kg", veg: true, emoji: "🟨" },
       { id: "moong-dal-halwa", name: "Moong Dal Halwa", desc: "Traditional moong dal halwa. Priced per kg.", price: 1500, unit: "kg", veg: true, emoji: "🟧", badge: "POPULAR" },
-      { id: "badam-halwa", name: "Badam Halwa", desc: "Rich almond halwa. Priced per kg.", price: 2500, unit: "kg", veg: true, emoji: "🌰" },
+      { id: "badam-halwa", images: ["images/badam-halwa-1.webp", "images/badam-halwa-2.webp"], name: "Badam Halwa", desc: "Rich almond halwa. Priced per kg.", price: 2500, unit: "kg", veg: true, emoji: "🌰" },
       { id: "walnut-halwa", name: "Walnut Halwa", desc: "Walnut halwa. Priced per kg.", price: 3000, unit: "kg", veg: true, emoji: "🟤" }
     ]
   },
@@ -117,10 +117,10 @@ window.MENU = [
     name: "Halwa Jars (300 g)",
     subtitle: "Our halwas in a 300 g jar, easy to gift",
     items: [
-      { id: "besan-halwa-jar", name: "Besan Halwa Jar (300 g)", desc: "Besan halwa in a 300 g jar.", price: 425, unit: "jar", veg: true, emoji: "🫙" },
+      { id: "besan-halwa-jar", images: ["images/besan-halwa-jar.webp"], name: "Besan Halwa Jar (300 g)", desc: "Besan halwa in a 300 g jar.", price: 425, unit: "jar", veg: true, emoji: "🫙" },
       { id: "moong-dal-halwa-jar", name: "Moong Dal Halwa Jar (300 g)", desc: "Moong dal halwa in a 300 g jar.", price: 425, unit: "jar", veg: true, emoji: "🫙" },
-      { id: "badam-halwa-jar", name: "Badam Halwa Jar (300 g)", desc: "Badam halwa in a 300 g jar.", price: 675, unit: "jar", veg: true, emoji: "🫙" },
-      { id: "walnut-halwa-jar", name: "Walnut Halwa Jar (300 g)", desc: "Walnut halwa in a 300 g jar.", price: 800, unit: "jar", veg: true, emoji: "🫙" }
+      { id: "badam-halwa-jar", images: ["images/badam-halwa-jar.webp"], name: "Badam Halwa Jar (300 g)", desc: "Badam halwa in a 300 g jar.", price: 675, unit: "jar", veg: true, emoji: "🫙" },
+      { id: "walnut-halwa-jar", images: ["images/walnut-halwa-jar.webp"], name: "Walnut Halwa Jar (300 g)", desc: "Walnut halwa in a 300 g jar.", price: 800, unit: "jar", veg: true, emoji: "🫙" }
     ]
   },
   {

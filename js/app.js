@@ -57,7 +57,8 @@
           desc: row.description || b.desc || "",
           price: typeof row.price === "number" ? row.price : (b.price || 0),
           badge: row.badge || b.badge || "",
-          images: row.image ? [row.image] : b.images,
+          // The Sheet's image column can hold one link or several, separated by commas.
+          images: row.image ? row.image.split(/[\s,]+/).filter(Boolean) : b.images,
           emoji: b.emoji || "🍬",
           stock: typeof row.stock === "number" ? row.stock : null,
           soldOut: row.available === false || row.stock === 0,
@@ -70,6 +71,25 @@
     ITEMS = {};
     CATALOG.forEach((c) => c.items.forEach((i) => { ITEMS[i.id] = i; }));
   }
+
+  // Photos are shown whole (not cropped), so there's space around them. Fill
+  // it with the colour of the photo's own corner so the photo blends in,
+  // whether it was shot on white or off-white.
+  function matchPhotoBackdrop(img) {
+    const box = img.closest(".thumb, .gallery-main");
+    if (!box) return;
+    try {
+      const c = document.createElement("canvas");
+      c.width = c.height = 1;
+      const ctx = c.getContext("2d");
+      ctx.drawImage(img, 0, 0, img.naturalWidth * 0.03, img.naturalHeight * 0.03, 0, 0, 1, 1);
+      const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+      box.style.background = `rgb(${r}, ${g}, ${b})`;
+    } catch {
+      /* photo from another website that doesn't allow reading it: keep default */
+    }
+  }
+  document.addEventListener("load", (e) => { if (e.target.tagName === "IMG") matchPhotoBackdrop(e.target); }, true);
 
   let toastTimer;
   function toast(msg) {

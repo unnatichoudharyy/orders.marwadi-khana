@@ -8,12 +8,12 @@ vrat-namkeen,Vrat Aloo Lachha Namkeen,Navratri Specials,"Crunchy potato sticks w
 lauki-halwa,Lauki ka Halwa,Navratri Specials,"Bottle gourd cooked in milk and ghee, topped with pista. 500 g box.",299,5,TRUE,,
 besan-halwa,Besan Halwa,Halwa (Per Kg),Classic besan halwa. Priced per kg.,1500,25,TRUE,,
 moong-dal-halwa,Moong Dal Halwa,Halwa (Per Kg),Traditional moong dal halwa. Priced per kg.,1500,25,TRUE,POPULAR,
-badam-halwa,Badam Halwa,Halwa (Per Kg),Rich almond halwa. Priced per kg.,2500,25,TRUE,,
+badam-halwa,Badam Halwa,Halwa (Per Kg),Rich almond halwa. Priced per kg.,2500,25,TRUE,,"images/badam-halwa-1.webp, images/badam-halwa-2.webp"
 walnut-halwa,Walnut Halwa,Halwa (Per Kg),Walnut halwa. Priced per kg.,3000,25,TRUE,,
-besan-halwa-jar,Besan Halwa Jar (300 g),Halwa Jars (300 g),Besan halwa in a 300 g jar.,425,25,TRUE,,
+besan-halwa-jar,Besan Halwa Jar (300 g),Halwa Jars (300 g),Besan halwa in a 300 g jar.,425,25,TRUE,,images/besan-halwa-jar.webp
 moong-dal-halwa-jar,Moong Dal Halwa Jar (300 g),Halwa Jars (300 g),Moong dal halwa in a 300 g jar.,425,25,TRUE,,
-badam-halwa-jar,Badam Halwa Jar (300 g),Halwa Jars (300 g),Badam halwa in a 300 g jar.,675,25,TRUE,,
-walnut-halwa-jar,Walnut Halwa Jar (300 g),Halwa Jars (300 g),Walnut halwa in a 300 g jar.,800,25,TRUE,,
+badam-halwa-jar,Badam Halwa Jar (300 g),Halwa Jars (300 g),Badam halwa in a 300 g jar.,675,25,TRUE,,images/badam-halwa-jar.webp
+walnut-halwa-jar,Walnut Halwa Jar (300 g),Halwa Jars (300 g),Walnut halwa in a 300 g jar.,800,25,TRUE,,images/walnut-halwa-jar.webp
 besan-laddu,Besan Laddu,Laddus (Per Kg),Classic besan laddu.,1500,25,TRUE,POPULAR,images/besan-laddu.webp
 atta-laddu,Atta Laddu,Laddus (Per Kg),Whole-wheat atta laddu.,1500,25,TRUE,,images/atta-laddu.webp
 nariyal-laddu,Nariyal Laddu,Laddus (Per Kg),Coconut laddu.,1500,25,TRUE,,images/nariyal-laddu.webp
