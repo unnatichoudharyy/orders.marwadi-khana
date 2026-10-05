@@ -106,9 +106,9 @@ window.MENU = [
     id: "halwa",
     name: "Halwa (Per Kg)",
     items: [
-      { id: "besan-halwa", name: "Besan Halwa", desc: "Classic besan halwa. Priced per kg.", price: 1500, unit: "kg", veg: true, emoji: "🟨" },
+      { id: "besan-halwa", images: ["images/besan-halwa.webp"], name: "Besan Halwa", desc: "Classic besan halwa. Priced per kg.", price: 1500, unit: "kg", veg: true, emoji: "🟨" },
       { id: "moong-dal-halwa", name: "Moong Dal Halwa", desc: "Traditional moong dal halwa. Priced per kg.", price: 1500, unit: "kg", veg: true, emoji: "🟧", badge: "POPULAR" },
-      { id: "badam-halwa", images: ["images/badam-halwa-1.webp", "images/badam-halwa-2.webp"], name: "Badam Halwa", desc: "Rich almond halwa. Priced per kg.", price: 2500, unit: "kg", veg: true, emoji: "🌰" },
+      { id: "badam-halwa", images: ["images/badam-halwa.webp"], name: "Badam Halwa", desc: "Rich almond halwa. Priced per kg.", price: 2500, unit: "kg", veg: true, emoji: "🌰" },
       { id: "walnut-halwa", name: "Walnut Halwa", desc: "Walnut halwa. Priced per kg.", price: 3000, unit: "kg", veg: true, emoji: "🟤" }
     ]
   },
