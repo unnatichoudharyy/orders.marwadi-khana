@@ -33,8 +33,8 @@ const WEIGHT = (half, kg) => ({
 
 // Laddus are priced per kg; a 1 kg box holds about 24, so each box is priced
 // by its share of a kg (box of 4 = 4/24 of the per-kg price).
-// Halwa is priced per kg; 500 g is half the per-kg price.
-const HALWA_WEIGHT = {
+// Halwa and burfi are priced per kg; 500 g is half the per-kg price.
+const KG_WEIGHT = {
   name: "Select weight", required: true, max: 1, choices: [
     { label: "500 g", factor: 0.5 },
     { label: "1 kg", factor: 1 }
@@ -115,10 +115,10 @@ window.MENU = [
     id: "halwa",
     name: "Halwa (Per Kg)",
     items: [
-      { id: "besan-halwa", images: ["images/besan-halwa.webp"], name: "Besan Halwa", desc: "Classic besan halwa. Priced per kg.", shelfLife: "5 days", price: 1500, unit: "kg", veg: true, emoji: "🟨", options: [HALWA_WEIGHT] },
-      { id: "moong-dal-halwa", images: ["images/moong-dal-halwa.webp"], name: "Moong Dal Halwa", desc: "Traditional moong dal halwa. Priced per kg.", shelfLife: "5 days", price: 1500, unit: "kg", veg: true, emoji: "🟧", badge: "POPULAR", options: [HALWA_WEIGHT] },
-      { id: "badam-halwa", images: ["images/badam-halwa.webp"], name: "Badam Halwa", desc: "Rich almond halwa. Priced per kg.", shelfLife: "7 days", price: 2500, unit: "kg", veg: true, emoji: "🌰", options: [HALWA_WEIGHT] },
-      { id: "walnut-halwa", images: ["images/walnut-halwa.webp"], name: "Walnut Halwa", desc: "Walnut halwa. Priced per kg.", shelfLife: "7 days", price: 3000, unit: "kg", veg: true, emoji: "🟤", options: [HALWA_WEIGHT] }
+      { id: "besan-halwa", images: ["images/besan-halwa.webp"], name: "Besan Halwa", desc: "Classic besan halwa. Priced per kg.", shelfLife: "5 days", price: 1500, unit: "kg", veg: true, emoji: "🟨", options: [KG_WEIGHT] },
+      { id: "moong-dal-halwa", images: ["images/moong-dal-halwa.webp"], name: "Moong Dal Halwa", desc: "Traditional moong dal halwa. Priced per kg.", shelfLife: "5 days", price: 1500, unit: "kg", veg: true, emoji: "🟧", badge: "POPULAR", options: [KG_WEIGHT] },
+      { id: "badam-halwa", images: ["images/badam-halwa.webp"], name: "Badam Halwa", desc: "Rich almond halwa. Priced per kg.", shelfLife: "7 days", price: 2500, unit: "kg", veg: true, emoji: "🌰", options: [KG_WEIGHT] },
+      { id: "walnut-halwa", images: ["images/walnut-halwa.webp"], name: "Walnut Halwa", desc: "Walnut halwa. Priced per kg.", shelfLife: "7 days", price: 3000, unit: "kg", veg: true, emoji: "🟤", options: [KG_WEIGHT] }
     ]
   },
   {
@@ -149,9 +149,9 @@ window.MENU = [
     id: "burfi",
     name: "Burfi (Per Kg)",
     items: [
-      { id: "besan-burfi", name: "Besan Burfi", desc: "Besan burfi. Priced per kg.", shelfLife: "7 days", price: 1500, unit: "kg", veg: true, emoji: "🟨" },
-      { id: "moong-dal-burfi", name: "Moong Dal Burfi", desc: "Moong dal burfi. Priced per kg.", shelfLife: "7 days", price: 1500, unit: "kg", veg: true, emoji: "🟧" },
-      { id: "kalakand", name: "Kalakand", desc: "Milk-based kalakand. Priced per kg.", shelfLife: "3–4 days", price: 1800, unit: "kg", veg: true, emoji: "⬜", badge: "POPULAR" },
+      { id: "besan-burfi", images: ["images/besan-burfi.webp"], name: "Besan Burfi", desc: "Besan burfi. Priced per kg.", shelfLife: "7 days", price: 1500, unit: "kg", veg: true, emoji: "🟨", options: [KG_WEIGHT] },
+      { id: "moong-dal-burfi", images: ["images/moong-dal-burfi.webp"], name: "Moong Dal Burfi", desc: "Moong dal burfi. Priced per kg.", shelfLife: "7 days", price: 1500, unit: "kg", veg: true, emoji: "🟧", options: [KG_WEIGHT] },
+      { id: "kalakand", images: ["images/kalakand.webp"], name: "Kalakand", desc: "Milk-based kalakand. Priced per kg.", shelfLife: "3–4 days", price: 1800, unit: "kg", veg: true, emoji: "⬜", badge: "POPULAR", options: [KG_WEIGHT] },
       { id: "mango-kalakand", name: "Mango Kalakand", desc: "Kalakand with mango. Priced per kg.", price: 2000, unit: "kg", veg: true, emoji: "🥭", badge: "NEW" }
     ]
   },
