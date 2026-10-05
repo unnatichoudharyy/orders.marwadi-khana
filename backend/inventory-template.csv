@@ -1,30 +1,30 @@
-id,name,category,description,price,stock,available,badge,image
-singhara-barfi,Singhare ki Barfi,Navratri Specials,Water-chestnut flour slow-roasted in desi ghee with khoya and cardamom. Perfect for the vrat.,220,8,TRUE,VRAT FRIENDLY,
-rajgira-laddoo,Rajgira Laddoo,Navratri Specials,"Puffed amaranth bound with jaggery and ghee. Light, crunchy and vrat-safe.",180,25,TRUE,VRAT FRIENDLY,
-makhana-kheer,Kesar Makhana Kheer,Navratri Specials,Roasted fox nuts simmered in full-cream milk with saffron and dry fruits. 400 ml tub.,249,25,TRUE,POPULAR,
-sabudana-vada,Sabudana Vada (6 pcs),Navratri Specials,"Crisp sago and potato vadas with peanuts, served with vrat-wali hari chutney.",199,25,TRUE,,
-kuttu-pakode,Kuttu Aloo Pakode,Navratri Specials,Buckwheat-batter potato fritters fried in groundnut oil. 250 g.,169,25,TRUE,,
-vrat-namkeen,Vrat Aloo Lachha Namkeen,Navratri Specials,"Crunchy potato sticks with peanuts, kishmish and sendha namak.",149,25,TRUE,,
-lauki-halwa,Lauki ka Halwa,Navratri Specials,"Bottle gourd cooked in milk and ghee, topped with pista. 500 g box.",299,5,TRUE,,
-besan-halwa,Besan Halwa,Halwa (Per Kg),Classic besan halwa. Priced per kg.,1500,25,TRUE,,images/besan-halwa.webp
-moong-dal-halwa,Moong Dal Halwa,Halwa (Per Kg),Traditional moong dal halwa. Priced per kg.,1500,25,TRUE,POPULAR,images/moong-dal-halwa.webp
-badam-halwa,Badam Halwa,Halwa (Per Kg),Rich almond halwa. Priced per kg.,2500,25,TRUE,,images/badam-halwa.webp
-walnut-halwa,Walnut Halwa,Halwa (Per Kg),Walnut halwa. Priced per kg.,3000,25,TRUE,,images/walnut-halwa.webp
-besan-halwa-jar,Besan Halwa Jar (300 g),Halwa Jars (300 g),Besan halwa in a 300 g jar.,425,25,TRUE,,images/besan-halwa-jar.webp
-moong-dal-halwa-jar,Moong Dal Halwa Jar (300 g),Halwa Jars (300 g),Moong dal halwa in a 300 g jar.,425,25,TRUE,,images/moong-dal-halwa-jar.webp
-badam-halwa-jar,Badam Halwa Jar (300 g),Halwa Jars (300 g),Badam halwa in a 300 g jar.,675,25,TRUE,,images/badam-halwa-jar.webp
-walnut-halwa-jar,Walnut Halwa Jar (300 g),Halwa Jars (300 g),Walnut halwa in a 300 g jar.,800,25,TRUE,,images/walnut-halwa-jar.webp
-besan-laddu,Besan Laddu,Laddus (Per Kg),Classic besan laddu.,1500,25,TRUE,POPULAR,images/besan-laddu.webp
-atta-laddu,Atta Laddu,Laddus (Per Kg),Whole-wheat atta laddu.,1500,25,TRUE,,images/atta-laddu.webp
-nariyal-laddu,Nariyal Laddu,Laddus (Per Kg),Coconut laddu.,1500,25,TRUE,,images/nariyal-laddu.webp
-moti-boondi-laddu,Moti Boondi Laddu,Laddus (Per Kg),Moti boondi laddu.,1500,25,TRUE,,images/moti-boondi-laddu.webp
-assorted-laddu-box,Assorted Laddu Box,Laddus (Per Kg),A mix of our laddus in one box.,1600,25,TRUE,,
-dry-fruit-laddu,Dry Fruit Laddu,Laddus (Per Kg),Dry fruit laddu.,2500,25,TRUE,,images/dry-fruit-laddu.webp
-besan-burfi,Besan Burfi,Burfi (Per Kg),Besan burfi. Priced per kg.,1500,25,TRUE,,
-moong-dal-burfi,Moong Dal Burfi,Burfi (Per Kg),Moong dal burfi. Priced per kg.,1500,25,TRUE,,
-kalakand,Kalakand,Burfi (Per Kg),Milk-based kalakand. Priced per kg.,1800,25,TRUE,POPULAR,
-mango-kalakand,Mango Kalakand,Burfi (Per Kg),Kalakand with mango. Priced per kg.,2000,25,TRUE,NEW,
-navratri-vrat-combo,Navratri Vrat Combo,Combos & Gift Boxes,Singhare ki Barfi 250 g + Rajgira Laddoo 250 g + Vrat Namkeen 250 g + Makhana Kheer 400 ml.,749,9,TRUE,VRAT FRIENDLY,
-kanya-pujan-box,Kanya Pujan Prasad Box,Combos & Gift Boxes,"Halwa, kala chana and puri prasad for Ashtami and Navami. Choose how many kanyas.",899,25,TRUE,POPULAR,
-marwadi-sampler,Marwadi Mithai Sampler,Combos & Gift Boxes,"Besan Laddu (box of 8), Moong Dal Halwa jar (300 g) and Kalakand (250 g).",1199,25,TRUE,POPULAR,
-dussehra-hamper,Festive Halwa & Laddu Hamper,Combos & Gift Boxes,"Badam Halwa jar, Walnut Halwa jar and a box of 12 Dry Fruit Laddus in a gift basket.",2499,25,TRUE,NEW,
+id,name,category,description,price,stock,available,badge,image,shelf_life
+singhara-barfi,Singhare ki Barfi,Navratri Specials,Water-chestnut flour slow-roasted in desi ghee with khoya and cardamom. Perfect for the vrat.,220,8,TRUE,VRAT FRIENDLY,,
+rajgira-laddoo,Rajgira Laddoo,Navratri Specials,"Puffed amaranth bound with jaggery and ghee. Light, crunchy and vrat-safe.",180,25,TRUE,VRAT FRIENDLY,,
+makhana-kheer,Kesar Makhana Kheer,Navratri Specials,Roasted fox nuts simmered in full-cream milk with saffron and dry fruits. 400 ml tub.,249,25,TRUE,POPULAR,,
+sabudana-vada,Sabudana Vada (6 pcs),Navratri Specials,"Crisp sago and potato vadas with peanuts, served with vrat-wali hari chutney.",199,25,TRUE,,,
+kuttu-pakode,Kuttu Aloo Pakode,Navratri Specials,Buckwheat-batter potato fritters fried in groundnut oil. 250 g.,169,25,TRUE,,,
+vrat-namkeen,Vrat Aloo Lachha Namkeen,Navratri Specials,"Crunchy potato sticks with peanuts, kishmish and sendha namak.",149,25,TRUE,,,
+lauki-halwa,Lauki ka Halwa,Navratri Specials,"Bottle gourd cooked in milk and ghee, topped with pista. 500 g box.",299,5,TRUE,,,
+besan-halwa,Besan Halwa,Halwa (Per Kg),Classic besan halwa. Priced per kg.,1500,25,TRUE,,images/besan-halwa.webp,5 days
+moong-dal-halwa,Moong Dal Halwa,Halwa (Per Kg),Traditional moong dal halwa. Priced per kg.,1500,25,TRUE,POPULAR,images/moong-dal-halwa.webp,5 days
+badam-halwa,Badam Halwa,Halwa (Per Kg),Rich almond halwa. Priced per kg.,2500,25,TRUE,,images/badam-halwa.webp,7 days
+walnut-halwa,Walnut Halwa,Halwa (Per Kg),Walnut halwa. Priced per kg.,3000,25,TRUE,,images/walnut-halwa.webp,7 days
+besan-halwa-jar,Besan Halwa Jar (300 g),Halwa Jars (300 g),Besan halwa in a 300 g jar.,425,25,TRUE,,images/besan-halwa-jar.webp,5 days
+moong-dal-halwa-jar,Moong Dal Halwa Jar (300 g),Halwa Jars (300 g),Moong dal halwa in a 300 g jar.,425,25,TRUE,,images/moong-dal-halwa-jar.webp,5 days
+badam-halwa-jar,Badam Halwa Jar (300 g),Halwa Jars (300 g),Badam halwa in a 300 g jar.,675,25,TRUE,,images/badam-halwa-jar.webp,7 days
+walnut-halwa-jar,Walnut Halwa Jar (300 g),Halwa Jars (300 g),Walnut halwa in a 300 g jar.,800,25,TRUE,,images/walnut-halwa-jar.webp,7 days
+besan-laddu,Besan Laddu,Laddus (Per Kg),Classic besan laddu.,1500,25,TRUE,POPULAR,images/besan-laddu.webp,15 days
+atta-laddu,Atta Laddu,Laddus (Per Kg),Whole-wheat atta laddu.,1500,25,TRUE,,images/atta-laddu.webp,15 days
+nariyal-laddu,Nariyal Laddu,Laddus (Per Kg),Coconut laddu.,1500,25,TRUE,,images/nariyal-laddu.webp,7 days
+moti-boondi-laddu,Moti Boondi Laddu,Laddus (Per Kg),Moti boondi laddu.,1500,25,TRUE,,images/moti-boondi-laddu.webp,3 days
+assorted-laddu-box,Assorted Laddu Box,Laddus (Per Kg),A mix of our laddus in one box.,1600,25,TRUE,,,7 days
+dry-fruit-laddu,Dry Fruit Laddu,Laddus (Per Kg),Dry fruit laddu.,2500,25,TRUE,,images/dry-fruit-laddu.webp,15 days
+besan-burfi,Besan Burfi,Burfi (Per Kg),Besan burfi. Priced per kg.,1500,25,TRUE,,,7 days
+moong-dal-burfi,Moong Dal Burfi,Burfi (Per Kg),Moong dal burfi. Priced per kg.,1500,25,TRUE,,,7 days
+kalakand,Kalakand,Burfi (Per Kg),Milk-based kalakand. Priced per kg.,1800,25,TRUE,POPULAR,,3–4 days
+mango-kalakand,Mango Kalakand,Burfi (Per Kg),Kalakand with mango. Priced per kg.,2000,25,TRUE,NEW,,
+navratri-vrat-combo,Navratri Vrat Combo,Combos & Gift Boxes,Singhare ki Barfi 250 g + Rajgira Laddoo 250 g + Vrat Namkeen 250 g + Makhana Kheer 400 ml.,749,9,TRUE,VRAT FRIENDLY,,
+kanya-pujan-box,Kanya Pujan Prasad Box,Combos & Gift Boxes,"Halwa, kala chana and puri prasad for Ashtami and Navami. Choose how many kanyas.",899,25,TRUE,POPULAR,,
+marwadi-sampler,Marwadi Mithai Sampler,Combos & Gift Boxes,"Besan Laddu (box of 8), Moong Dal Halwa jar (300 g) and Kalakand (250 g).",1199,25,TRUE,POPULAR,,
+dussehra-hamper,Festive Halwa & Laddu Hamper,Combos & Gift Boxes,"Badam Halwa jar, Walnut Halwa jar and a box of 12 Dry Fruit Laddus in a gift basket.",2499,25,TRUE,NEW,,

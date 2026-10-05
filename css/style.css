@@ -395,3 +395,5 @@ dialog.popup .muted-sm { color: var(--muted); font-size: .85rem; margin-bottom: 
 .item.sold .thumb { filter: grayscale(.85); }
 .item.sold .add { color: var(--danger); }
 .price .unit { font-weight: 400; color: var(--muted); font-size: .78em; margin-left: 3px; }
+.shelf { margin: 6px 0 0; font-size: .74rem; color: var(--primary); font-weight: 500; }
+.detail .shelf { margin: 8px 0 0; font-size: .85rem; }

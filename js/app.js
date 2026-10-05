@@ -57,6 +57,7 @@
           desc: row.description || b.desc || "",
           price: typeof row.price === "number" ? row.price : (b.price || 0),
           badge: row.badge || b.badge || "",
+          shelfLife: row.shelf_life || b.shelfLife || "",
           // The Sheet's image column can hold one link or several, separated by commas.
           images: row.image ? row.image.split(/[\s,]+/).filter(Boolean) : b.images,
           emoji: b.emoji || "🍬",
@@ -171,6 +172,8 @@
     });
     return p;
   }
+  const shelfLifeNote = (item) =>
+    item.shelfLife ? `<p class="shelf">🕒 Shelf life: ${esc(item.shelfLife)}</p>` : "";
   const priceNote = (item) => (item.unit ? `<small class="unit">/ ${esc(item.unit)}</small>` : "");
   function selLabel(item, sel) {
     const parts = [];
@@ -315,6 +318,7 @@
         ${item.badge ? `<span class="tag ${badgeClass(item.badge)}">${esc(item.badge)}</span>` : ""}
         <div class="name-row"><h3>${esc(item.name)}</h3>${vegMark(item)}</div>
         <p class="desc">${esc(item.desc)}</p>
+        ${shelfLifeNote(item)}
         <div class="buy"><span class="price">${plain(item.price)}${priceNote(item)}</span>${action}</div>
       </div>
     </article>`;
@@ -501,6 +505,7 @@
         <div class="detail">
           ${item.badge ? `<span class="tag ${badgeClass(item.badge)}">${esc(item.badge)}</span>` : ""}
           <div class="detail-head">${vegMark(item)}<h1>${esc(item.name)}</h1><span class="price">${plain(item.price)}.00${priceNote(item)}</span></div>
+          ${shelfLifeNote(item)}
           <p class="desc-full">${esc(item.desc)}${lowStock(item) && !item.soldOut ? `<br><strong style="color:var(--danger)">Only ${item.stock} left!</strong>` : ""}${item.soldOut ? `<br><strong style="color:var(--danger)">${item.unavailable ? "Not available right now" : "Sold out"}</strong>` : ""}</p>
           <form id="optForm">
             ${groups.map((g, gi) => `

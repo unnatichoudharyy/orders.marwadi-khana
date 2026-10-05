@@ -20,6 +20,7 @@
 //             price on a choice is added to the base price;
 //             factor on a choice scales it (e.g. factor: 0.5 for half a kg)
 //   unit      optional, shown after the price: "kg" → "1,500 / kg"
+//   shelfLife optional, e.g. "7 days" — shown on the card and item page
 // ---------------------------------------------------------------------------
 
 const WEIGHT = (half, kg) => ({
@@ -106,10 +107,10 @@ window.MENU = [
     id: "halwa",
     name: "Halwa (Per Kg)",
     items: [
-      { id: "besan-halwa", images: ["images/besan-halwa.webp"], name: "Besan Halwa", desc: "Classic besan halwa. Priced per kg.", price: 1500, unit: "kg", veg: true, emoji: "🟨" },
-      { id: "moong-dal-halwa", images: ["images/moong-dal-halwa.webp"], name: "Moong Dal Halwa", desc: "Traditional moong dal halwa. Priced per kg.", price: 1500, unit: "kg", veg: true, emoji: "🟧", badge: "POPULAR" },
-      { id: "badam-halwa", images: ["images/badam-halwa.webp"], name: "Badam Halwa", desc: "Rich almond halwa. Priced per kg.", price: 2500, unit: "kg", veg: true, emoji: "🌰" },
-      { id: "walnut-halwa", images: ["images/walnut-halwa.webp"], name: "Walnut Halwa", desc: "Walnut halwa. Priced per kg.", price: 3000, unit: "kg", veg: true, emoji: "🟤" }
+      { id: "besan-halwa", images: ["images/besan-halwa.webp"], name: "Besan Halwa", desc: "Classic besan halwa. Priced per kg.", shelfLife: "5 days", price: 1500, unit: "kg", veg: true, emoji: "🟨" },
+      { id: "moong-dal-halwa", images: ["images/moong-dal-halwa.webp"], name: "Moong Dal Halwa", desc: "Traditional moong dal halwa. Priced per kg.", shelfLife: "5 days", price: 1500, unit: "kg", veg: true, emoji: "🟧", badge: "POPULAR" },
+      { id: "badam-halwa", images: ["images/badam-halwa.webp"], name: "Badam Halwa", desc: "Rich almond halwa. Priced per kg.", shelfLife: "7 days", price: 2500, unit: "kg", veg: true, emoji: "🌰" },
+      { id: "walnut-halwa", images: ["images/walnut-halwa.webp"], name: "Walnut Halwa", desc: "Walnut halwa. Priced per kg.", shelfLife: "7 days", price: 3000, unit: "kg", veg: true, emoji: "🟤" }
     ]
   },
   {
@@ -117,10 +118,10 @@ window.MENU = [
     name: "Halwa Jars (300 g)",
     subtitle: "Our halwas in a 300 g jar, easy to gift",
     items: [
-      { id: "besan-halwa-jar", images: ["images/besan-halwa-jar.webp"], name: "Besan Halwa Jar (300 g)", desc: "Besan halwa in a 300 g jar.", price: 425, unit: "jar", veg: true, emoji: "🫙" },
-      { id: "moong-dal-halwa-jar", images: ["images/moong-dal-halwa-jar.webp"], name: "Moong Dal Halwa Jar (300 g)", desc: "Moong dal halwa in a 300 g jar.", price: 425, unit: "jar", veg: true, emoji: "🫙" },
-      { id: "badam-halwa-jar", images: ["images/badam-halwa-jar.webp"], name: "Badam Halwa Jar (300 g)", desc: "Badam halwa in a 300 g jar.", price: 675, unit: "jar", veg: true, emoji: "🫙" },
-      { id: "walnut-halwa-jar", images: ["images/walnut-halwa-jar.webp"], name: "Walnut Halwa Jar (300 g)", desc: "Walnut halwa in a 300 g jar.", price: 800, unit: "jar", veg: true, emoji: "🫙" }
+      { id: "besan-halwa-jar", images: ["images/besan-halwa-jar.webp"], name: "Besan Halwa Jar (300 g)", desc: "Besan halwa in a 300 g jar.", shelfLife: "5 days", price: 425, unit: "jar", veg: true, emoji: "🫙" },
+      { id: "moong-dal-halwa-jar", images: ["images/moong-dal-halwa-jar.webp"], name: "Moong Dal Halwa Jar (300 g)", desc: "Moong dal halwa in a 300 g jar.", shelfLife: "5 days", price: 425, unit: "jar", veg: true, emoji: "🫙" },
+      { id: "badam-halwa-jar", images: ["images/badam-halwa-jar.webp"], name: "Badam Halwa Jar (300 g)", desc: "Badam halwa in a 300 g jar.", shelfLife: "7 days", price: 675, unit: "jar", veg: true, emoji: "🫙" },
+      { id: "walnut-halwa-jar", images: ["images/walnut-halwa-jar.webp"], name: "Walnut Halwa Jar (300 g)", desc: "Walnut halwa in a 300 g jar.", shelfLife: "7 days", price: 800, unit: "jar", veg: true, emoji: "🫙" }
     ]
   },
   {
@@ -128,21 +129,21 @@ window.MENU = [
     name: "Laddus (Per Kg)",
     subtitle: "Boxes of 4, 8, 12 or 24 laddus · a 1 kg box has about 24 laddus",
     items: [
-      { id: "besan-laddu", images: ["images/besan-laddu.webp"], name: "Besan Laddu", desc: "Classic besan laddu.", price: 1500, unit: "kg", veg: true, emoji: "🟡", badge: "POPULAR", options: [LADDU_BOX] },
-      { id: "atta-laddu", images: ["images/atta-laddu.webp"], name: "Atta Laddu", desc: "Whole-wheat atta laddu.", price: 1500, unit: "kg", veg: true, emoji: "🟤", options: [LADDU_BOX] },
-      { id: "nariyal-laddu", images: ["images/nariyal-laddu.webp"], name: "Nariyal Laddu", desc: "Coconut laddu.", price: 1500, unit: "kg", veg: true, emoji: "🥥", options: [LADDU_BOX] },
-      { id: "moti-boondi-laddu", images: ["images/moti-boondi-laddu.webp"], name: "Moti Boondi Laddu", desc: "Moti boondi laddu.", price: 1500, unit: "kg", veg: true, emoji: "🟠", options: [LADDU_BOX] },
-      { id: "assorted-laddu-box", name: "Assorted Laddu Box", desc: "A mix of our laddus in one box.", price: 1600, unit: "kg", veg: true, emoji: "🎁", options: [LADDU_BOX] },
-      { id: "dry-fruit-laddu", images: ["images/dry-fruit-laddu.webp"], name: "Dry Fruit Laddu", desc: "Dry fruit laddu.", price: 2500, unit: "kg", veg: true, emoji: "🌰", options: [LADDU_BOX] }
+      { id: "besan-laddu", images: ["images/besan-laddu.webp"], name: "Besan Laddu", desc: "Classic besan laddu.", shelfLife: "15 days", price: 1500, unit: "kg", veg: true, emoji: "🟡", badge: "POPULAR", options: [LADDU_BOX] },
+      { id: "atta-laddu", images: ["images/atta-laddu.webp"], name: "Atta Laddu", desc: "Whole-wheat atta laddu.", shelfLife: "15 days", price: 1500, unit: "kg", veg: true, emoji: "🟤", options: [LADDU_BOX] },
+      { id: "nariyal-laddu", images: ["images/nariyal-laddu.webp"], name: "Nariyal Laddu", desc: "Coconut laddu.", shelfLife: "7 days", price: 1500, unit: "kg", veg: true, emoji: "🥥", options: [LADDU_BOX] },
+      { id: "moti-boondi-laddu", images: ["images/moti-boondi-laddu.webp"], name: "Moti Boondi Laddu", desc: "Moti boondi laddu.", shelfLife: "3 days", price: 1500, unit: "kg", veg: true, emoji: "🟠", options: [LADDU_BOX] },
+      { id: "assorted-laddu-box", name: "Assorted Laddu Box", desc: "A mix of our laddus in one box.", shelfLife: "7 days", price: 1600, unit: "kg", veg: true, emoji: "🎁", options: [LADDU_BOX] },
+      { id: "dry-fruit-laddu", images: ["images/dry-fruit-laddu.webp"], name: "Dry Fruit Laddu", desc: "Dry fruit laddu.", shelfLife: "15 days", price: 2500, unit: "kg", veg: true, emoji: "🌰", options: [LADDU_BOX] }
     ]
   },
   {
     id: "burfi",
     name: "Burfi (Per Kg)",
     items: [
-      { id: "besan-burfi", name: "Besan Burfi", desc: "Besan burfi. Priced per kg.", price: 1500, unit: "kg", veg: true, emoji: "🟨" },
-      { id: "moong-dal-burfi", name: "Moong Dal Burfi", desc: "Moong dal burfi. Priced per kg.", price: 1500, unit: "kg", veg: true, emoji: "🟧" },
-      { id: "kalakand", name: "Kalakand", desc: "Milk-based kalakand. Priced per kg.", price: 1800, unit: "kg", veg: true, emoji: "⬜", badge: "POPULAR" },
+      { id: "besan-burfi", name: "Besan Burfi", desc: "Besan burfi. Priced per kg.", shelfLife: "7 days", price: 1500, unit: "kg", veg: true, emoji: "🟨" },
+      { id: "moong-dal-burfi", name: "Moong Dal Burfi", desc: "Moong dal burfi. Priced per kg.", shelfLife: "7 days", price: 1500, unit: "kg", veg: true, emoji: "🟧" },
+      { id: "kalakand", name: "Kalakand", desc: "Milk-based kalakand. Priced per kg.", shelfLife: "3–4 days", price: 1800, unit: "kg", veg: true, emoji: "⬜", badge: "POPULAR" },
       { id: "mango-kalakand", name: "Mango Kalakand", desc: "Kalakand with mango. Priced per kg.", price: 2000, unit: "kg", veg: true, emoji: "🥭", badge: "NEW" }
     ]
   },
