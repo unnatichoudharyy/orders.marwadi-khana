@@ -65,7 +65,7 @@ Save, commit and push. Done 🎉
 | **stock** | How many you can still sell. 10 or less shows "ONLY N LEFT!". **0 = SOLD OUT**. **Blank = unlimited**. |
 | **available** | Untick to switch an item off (it shows NOT AVAILABLE). |
 | **badge** | Optional label: `POPULAR`, `NEW`, `VRAT FRIENDLY`… |
-| **image** | Optional link to a photo, e.g. `images/kaju-katli.jpg` or a full https link. |
+| **image** | Optional photo link, e.g. `images/besan-halwa-jar.webp` or a full https link. For several photos (shown as a gallery on the item page), separate them with commas. |
 
 - **Add an item:** add a new row. Items with sizes or add-ons (like weights) also need an entry with the same `id` in `js/menu.js`. Items without one are sold as a single unit.
 - **Remove an item completely:** delete its row.
