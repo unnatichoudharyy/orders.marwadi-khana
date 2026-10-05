@@ -33,6 +33,14 @@ const WEIGHT = (half, kg) => ({
 
 // Laddus are priced per kg; a 1 kg box holds about 24, so each box is priced
 // by its share of a kg (box of 4 = 4/24 of the per-kg price).
+// Halwa is priced per kg; 500 g is half the per-kg price.
+const HALWA_WEIGHT = {
+  name: "Select weight", required: true, max: 1, choices: [
+    { label: "500 g", factor: 0.5 },
+    { label: "1 kg", factor: 1 }
+  ]
+};
+
 const LADDU_BOX = {
   name: "Select box", required: true, max: 1, choices: [
     { label: "Box of 4 laddus (≈ 170 g)", factor: 4 / 24 },
@@ -107,10 +115,10 @@ window.MENU = [
     id: "halwa",
     name: "Halwa (Per Kg)",
     items: [
-      { id: "besan-halwa", images: ["images/besan-halwa.webp"], name: "Besan Halwa", desc: "Classic besan halwa. Priced per kg.", shelfLife: "5 days", price: 1500, unit: "kg", veg: true, emoji: "🟨" },
-      { id: "moong-dal-halwa", images: ["images/moong-dal-halwa.webp"], name: "Moong Dal Halwa", desc: "Traditional moong dal halwa. Priced per kg.", shelfLife: "5 days", price: 1500, unit: "kg", veg: true, emoji: "🟧", badge: "POPULAR" },
-      { id: "badam-halwa", images: ["images/badam-halwa.webp"], name: "Badam Halwa", desc: "Rich almond halwa. Priced per kg.", shelfLife: "7 days", price: 2500, unit: "kg", veg: true, emoji: "🌰" },
-      { id: "walnut-halwa", images: ["images/walnut-halwa.webp"], name: "Walnut Halwa", desc: "Walnut halwa. Priced per kg.", shelfLife: "7 days", price: 3000, unit: "kg", veg: true, emoji: "🟤" }
+      { id: "besan-halwa", images: ["images/besan-halwa.webp"], name: "Besan Halwa", desc: "Classic besan halwa. Priced per kg.", shelfLife: "5 days", price: 1500, unit: "kg", veg: true, emoji: "🟨", options: [HALWA_WEIGHT] },
+      { id: "moong-dal-halwa", images: ["images/moong-dal-halwa.webp"], name: "Moong Dal Halwa", desc: "Traditional moong dal halwa. Priced per kg.", shelfLife: "5 days", price: 1500, unit: "kg", veg: true, emoji: "🟧", badge: "POPULAR", options: [HALWA_WEIGHT] },
+      { id: "badam-halwa", images: ["images/badam-halwa.webp"], name: "Badam Halwa", desc: "Rich almond halwa. Priced per kg.", shelfLife: "7 days", price: 2500, unit: "kg", veg: true, emoji: "🌰", options: [HALWA_WEIGHT] },
+      { id: "walnut-halwa", images: ["images/walnut-halwa.webp"], name: "Walnut Halwa", desc: "Walnut halwa. Priced per kg.", shelfLife: "7 days", price: 3000, unit: "kg", veg: true, emoji: "🟤", options: [HALWA_WEIGHT] }
     ]
   },
   {
