@@ -66,6 +66,15 @@ const DAY_1_ORDERS_OPEN = "2026-10-07"; // Day 1 can be pre-ordered from this da
 const THALIS_SHOWN_UNTIL = "2026-10-19"; // the section disappears after this date
 const THALI_PRICE = null;              // ₹ per thali — null shows "Price coming soon"
 
+// Photo for each day's thali (days without one show the 🍱 emoji).
+const THALI_PHOTOS = {
+  1: "images/navratri-thali-day-1.webp",
+  2: "images/navratri-thali-day-2.webp",
+  3: "images/navratri-thali-day-3.webp",
+  4: "images/navratri-thali-day-4.webp",
+  5: "images/navratri-thali-day-5.webp"
+};
+
 function navratriThali(day, name, includes) {
   const d = new Date(NAVRATRI_DAY_1 + "T00:00:00");
   d.setDate(d.getDate() + day - 1);
@@ -80,6 +89,7 @@ function navratriThali(day, name, includes) {
     // Days 2–9 open the day before their delivery day; Day 1 opens early.
     orderFrom: day === 1 ? DAY_1_ORDERS_OPEN : undefined,
     visibleUntil: THALIS_SHOWN_UNTIL,
+    images: THALI_PHOTOS[day] ? [THALI_PHOTOS[day]] : undefined,
     veg: true,
     emoji: "🍱"
   };
