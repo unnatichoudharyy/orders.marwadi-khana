@@ -1,4 +1,13 @@
 id,name,category,description,price,stock,available,badge,image,shelf_life
+navratri-thali-day-1,Navratri Thali · Day 1,Navratri Thalis,Akhrot Arbi Tikki – 2 · Aloo Anar Chaat · Paneer Mircha Sabji · Dahi Wali Arbi · Kuttu Puri – 5 · Makhana Kheer · Sabudana Papad – 1 · Green Chutney + Mukhwas,,25,TRUE,,,
+navratri-thali-day-2,Navratri Thali · Day 2,Navratri Thalis,Kaccha Kela Tikki – 2 · Shakarkandi Chaat · Angoor Makhana Sabji · Aloo Tamatar Sabji · Kuttu Paratha – 3 · Aloo Halwa · Sabudana Papad – 1 · Green Chutney + Mukhwas,,25,TRUE,,,
+navratri-thali-day-3,Navratri Thali · Day 3,Navratri Thalis,Sabudana Tikki – 2 · Fruit & Anar Chaat · Kele Kofta Curry · Paneer Makhana Sabji · Kuttu Puri – 5 · Nariyal Laddu – 1 · Sabudana Papad – 1 · Green Chutney + Mukhwas,,25,TRUE,,,
+navratri-thali-day-4,Navratri Thali · Day 4,Navratri Thalis,Kacche Kele Badam Tikki – 2 · Aloo Anar Raita · Sukhi Arbi · Dahi Wale Aloo · Kuttu Paratha – 3 · Sabudana Kheer · Sabudana Papad – 1 · Green Chutney + Mukhwas,,25,TRUE,,,
+navratri-thali-day-5,Navratri Thali · Day 5,Navratri Thalis,Arbi Walnut Tikki – 2 · Shakarkandi Chaat · Paneer Mircha Sabji · Vrat Wale Aloo Tamatar · Kuttu Puri – 5 · Aloo Ka Halwa · Sabudana Papad – 1 · Green Chutney + Mukhwas,,25,TRUE,,,
+navratri-thali-day-6,Navratri Thali · Day 6,Navratri Thalis,Sabudana Khichdi · Fruit Chaat · Dahi Wale Aloo · Hari Chutney Paneer · Kuttu Paratha – 3 · Nariyal Laddu – 1 · Sabudana Papad – 1 · Green Chutney + Mukhwas,,25,TRUE,,,
+navratri-thali-day-7,Navratri Thali · Day 7,Navratri Thalis,Kacche Kele Ka Kofta – 2 · Aloo Anar Raita · Makhana Kaju Curry · Sukhi Arbi · Kuttu Puri – 5 · Samak Rice Kheer · Sabudana Papad – 1 · Green Chutney + Mukhwas,,25,TRUE,,,
+navratri-thali-day-8,Navratri Thali · Day 8,Navratri Thalis,Kaccha Kela Peanut Tikki – 2 · Shakarkandi Anar Chaat · Paneer Anardana Sabji · Dahi Wale Aloo · Kuttu Paratha – 3 · Nariyal Burfi – 1 · Sabudana Papad – 1 · Green Chutney + Mukhwas,,25,TRUE,,,
+navratri-thali-day-9,Navratri Thali · Day 9 (Navratri Finale) 🌸,Navratri Thalis,Kala Chana · Jhol Ke Aloo · Poori · Chawal Ki Kheer · Sooji Halwa · Sabudana Papad – 1 · Green Chutney + Mukhwas,,25,TRUE,,,
 singhara-barfi,Singhare ki Barfi,Navratri Specials,Water-chestnut flour slow-roasted in desi ghee with khoya and cardamom. Perfect for the vrat.,220,8,TRUE,VRAT FRIENDLY,,
 rajgira-laddoo,Rajgira Laddoo,Navratri Specials,"Puffed amaranth bound with jaggery and ghee. Light, crunchy and vrat-safe.",180,25,TRUE,VRAT FRIENDLY,,
 makhana-kheer,Kesar Makhana Kheer,Navratri Specials,Roasted fox nuts simmered in full-cream milk with saffron and dry fruits. 400 ml tub.,249,25,TRUE,POPULAR,,
