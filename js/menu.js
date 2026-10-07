@@ -64,7 +64,7 @@ const GIFTING = {
 const NAVRATRI_DAY_1 = "2026-10-11";   // date of Day 1 (YYYY-MM-DD)
 const DAY_1_ORDERS_OPEN = "2026-10-07"; // Day 1 can be pre-ordered from this date
 const THALIS_SHOWN_UNTIL = "2026-10-19"; // the section disappears after this date
-const THALI_PRICE = null;              // ₹ per thali — null shows "Price coming soon"
+const THALI_PRICE = 750;               // ₹ per thali (null shows "Price coming soon")
 
 // Photo for each day's thali (days without one show the 🍱 emoji).
 const THALI_PHOTOS = {

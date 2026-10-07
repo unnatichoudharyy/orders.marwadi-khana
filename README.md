@@ -64,7 +64,7 @@ The **Navratri Thalis** section lists one thali per day of Navratri. All 9 are a
 - **Ordering:** Day 1 can be pre-ordered from 7 Oct (`DAY_1_ORDERS_OPEN`). Days 2–9 open the day before their day (Day 2 on 11 Oct, Day 3 on 12 Oct, and so on), and each stays open on the day itself for slots at least 2 hours away. Outside that window the button reads "OPENS …" or "CLOSED".
 - **Visibility:** all nine stay on the menu until 19 Oct (`THALIS_SHOWN_UNTIL`). From 20 Oct the section, its banner and its menu entry disappear.
 - **Mixed carts:** a cart can't mix thalis for different days. A thali plus mithai goes out together on the thali's day, if the mithai can be delivered that day.
-- **Price:** set the price in the Sheet's price column (or `THALI_PRICE` in `js/menu.js`). Until then the thalis show "Price coming soon" and can't be ordered.
+- **Price:** ₹750 per thali (`THALI_PRICE` in `js/menu.js`, or the Sheet's price column, which takes priority). Leaving it blank shows "Price coming soon" and stops orders.
 - **Dates and window:** change the dates with `NAVRATRI_DAY_1` in `js/menu.js`, and the window with `thaliOrderDaysBefore` / `sameDayPrepHours` in `js/config.js`.
 
 ## Delivery area
