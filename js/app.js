@@ -367,7 +367,7 @@
       const q = f.q.toLowerCase();
       if (!(item.name + " " + item.desc).toLowerCase().includes(q)) return false;
     }
-    if (f.vrat && !(item.category === "navratri" || /vrat/i.test(item.badge || ""))) return false;
+    if (f.vrat && !(item.category === "navratri-thali" || /vrat/i.test(item.badge || ""))) return false;
     if (f.popular && !/popular/i.test(item.badge || "")) return false;
     if (f.under500 && (!hasPrice(item) || minPrice(item) >= 500)) return false;
     return true;
@@ -425,7 +425,7 @@
         <input id="q" type="search" placeholder="Search kaju katli, ghewar, combos…" value="${esc(f.q)}" autocomplete="off">
       </div>
       <div class="filter-row" ${state.showFilters ? "" : "hidden"}>
-        <button class="chip${f.vrat ? " on" : ""}" data-filter="vrat">🪔 Vrat friendly</button>
+        <button class="chip${f.vrat ? " on" : ""}" data-filter="vrat">🪔 Navratri</button>
         <button class="chip${f.popular ? " on" : ""}" data-filter="popular">⭐ Popular</button>
         <button class="chip${f.under500 ? " on" : ""}" data-filter="under500">Under ${S.currency}500</button>
       </div>
