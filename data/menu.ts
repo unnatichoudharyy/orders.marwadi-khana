@@ -1,5 +1,8 @@
+import type { Category, MenuItem, OptionGroup } from "@/lib/types";
+
 // ---------------------------------------------------------------------------
 // Menu data — add, remove or edit categories and items here.
+// (Field reference: see lib/types.ts.)
 //
 // Category: { id, name, subtitle?, items: [...] }
 // Item fields:
@@ -31,14 +34,14 @@
 // Laddus are priced per kg; a 1 kg box holds about 24, so each box is priced
 // by its share of a kg (box of 4 = 4/24 of the per-kg price).
 // Halwa and burfi are priced per kg; 500 g is half the per-kg price.
-const KG_WEIGHT = {
+const KG_WEIGHT: OptionGroup = {
   name: "Select weight", required: true, max: 1, choices: [
     { label: "500 g", factor: 0.5 },
     { label: "1 kg", factor: 1 }
   ]
 };
 
-const LADDU_BOX = {
+const LADDU_BOX: OptionGroup = {
   name: "Select box", required: true, max: 1, choices: [
     { label: "Box of 4 laddus (≈ 170 g)", factor: 4 / 24 },
     { label: "Box of 8 laddus (≈ 330 g)", factor: 8 / 24 },
@@ -47,7 +50,7 @@ const LADDU_BOX = {
   ]
 };
 
-const GIFTING = {
+const GIFTING: OptionGroup = {
   name: "Add-ons", required: false, max: 3, choices: [
     { label: "Festive gift wrap", price: 50 },
     { label: "Greeting card with your message", price: 30 },
@@ -58,16 +61,16 @@ const GIFTING = {
 // ---------------------------------------------------------------------------
 // Navratri thalis: one thali per day of Navratri. Each is delivered only on
 // its own day, and can be ordered the day before or on the day itself
-// (see thaliOrderDaysBefore in js/config.js) — except Day 1, open from
+// (see thaliOrderDaysBefore in data/config.ts) — except Day 1, open from
 // DAY_1_ORDERS_OPEN. All nine stay on the menu until THALIS_SHOWN_UNTIL.
 // ---------------------------------------------------------------------------
 const NAVRATRI_DAY_1 = "2026-10-11";   // date of Day 1 (YYYY-MM-DD)
 const DAY_1_ORDERS_OPEN = "2026-10-07"; // Day 1 can be pre-ordered from this date
 const THALIS_SHOWN_UNTIL = "2026-10-19"; // the section disappears after this date
-const THALI_PRICE = 750;               // ₹ per thali (null shows "Price coming soon")
+const THALI_PRICE: number | null = 750;               // ₹ per thali (null shows "Price coming soon")
 
 // Photo for each day's thali (days without one show the 🍱 emoji).
-const THALI_PHOTOS = {
+const THALI_PHOTOS: Record<number, string> = {
   1: "images/navratri-thali-day-1.webp",
   2: "images/navratri-thali-day-2.webp",
   3: "images/navratri-thali-day-3.webp",
@@ -75,7 +78,7 @@ const THALI_PHOTOS = {
   5: "images/navratri-thali-day-5.webp"
 };
 
-function navratriThali(day, name, includes) {
+function navratriThali(day: number, name: string, includes: string[]): MenuItem {
   const d = new Date(NAVRATRI_DAY_1 + "T00:00:00");
   d.setDate(d.getDate() + day - 1);
   const iso = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
@@ -187,7 +190,7 @@ const NAVRATRI_THALIS = [
   ])
 ];
 
-window.MENU = [
+export const MENU: Category[] = [
   {
     id: "navratri-thali",
     name: "Navratri Thalis",

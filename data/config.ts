@@ -1,7 +1,15 @@
 // ---------------------------------------------------------------------------
 // Store configuration — edit these values to make the site your own.
 // ---------------------------------------------------------------------------
-window.STORE = {
+import type { StoreConfig } from "@/lib/types";
+
+// Google Sheet web-app URL from backend/SETUP.md (looks like
+// https://script.google.com/macros/s/AKfy.../exec). Leave "" to use data/menu.ts
+// only. Can also be set at build time with NEXT_PUBLIC_BACKEND_URL (e.g. a
+// GitHub Actions variable), which is used when this is left "".
+const SHEET_URL: string = "";
+
+export const STORE: StoreConfig = {
   name: "Marwadi Khana",
   tagline: "Asli Marwadi mithai, ghee mein bani · pre-orders only",
   city: "Delhi NCR",
@@ -65,8 +73,8 @@ window.STORE = {
   // Inventory backend: the Google Sheet web-app URL from backend/SETUP.md
   // (looks like https://script.google.com/macros/s/AKfy.../exec).
   // When set, the site shows the items, prices and stock from your Sheet and
-  // every order reduces the stock there. Leave "" to use js/menu.js only.
-  backendUrl: "",
+  // every order reduces the stock there. Set SHEET_URL at the top of this file.
+  backendUrl: SHEET_URL || process.env.NEXT_PUBLIC_BACKEND_URL || "",
   lowStockAt: 10,           // show "ONLY N LEFT!" when stock is this or lower
   refreshSeconds: 60        // how often an open page re-checks the stock
 };

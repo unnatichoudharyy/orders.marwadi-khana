@@ -1,81 +1,93 @@
-# Marwadi Khana: online ordering site
+# Marwadi Khana: ordering site (Next.js)
 
-A mobile-first **pre-order** website for Marwadi Khana (mithai, Navratri thalis and combos).
-It is home delivery only, across Delhi NCR and Gurgaon.
-It uses plain HTML, CSS and JavaScript, with no build step and no server.
-You manage the menu and stock in a **Google Sheet** (see [backend/SETUP.md](backend/SETUP.md)).
+The **pre-order website for Marwadi Khana** (halwa, laddus, burfi, Navratri thalis and combos), with home delivery across Delhi NCR and Gurgaon.
+It's built with **Next.js 16 + React 19 + TypeScript** and published as a static site. It needs no server, so it can be hosted free on GitHub Pages.
+
+This is a like-for-like port of the earlier plain-HTML site. Before switching, the two were compared on the same customer journeys, and customers see and get the same thing:
+- **Rules:** menu, prices and sizes, 6 PM cut-off, Navratri thali windows and mixed-cart rules.
+- **Ordering:** stock from the Google Sheet, delivery-area check, checkout, and the WhatsApp/UPI flow.
 
 ## What customers can do
 
-1. **Menu**: browse collapsible categories. The **Menu** button jumps to a category. Customers can search and filter (Navratri, popular, under ₹500). Cards show "ONLY N LEFT!" when stock is low, and are greyed out as SOLD OUT or NOT AVAILABLE when they can't be ordered. Stock comes live from your Google Sheet.
-2. **Item page**: pick a required option (weight, type, number of kanyas) and optional add-ons (gift wrap, card…) with live pricing. After adding, the button changes to **Go to cart**.
-3. **Your Order**: change quantities and see the bill (sub total, delivery charges, GST, to pay).
-4. **Delivery address**: search a place, move the map pin, or use current location. The map uses OpenStreetMap, so no API key is needed.
-   An address outside Delhi NCR / Gurgaon shows a popup: *"Sorry, we are not currently delivering near your location."*
-5. **Checkout**: pick a delivery date and time slot (from 10 AM). Orders placed before 6 PM can be delivered the next day; after 6 PM the earliest date is the day after tomorrow. Enter name, email, mobile, house no., landmark and instructions. Choose UPI or cash on delivery.
-6. **Order received**: shows the order ID and summary. A **Confirm order on WhatsApp** button sends the full order (items, address, Google Maps link) to your WhatsApp number. A **Pay with UPI** button opens GPay/PhonePe/Paytm with the amount filled in.
+1. **Menu**: collapsible sections, a "Menu" jump list, search, and filters (Navratri, popular, under ₹500).
+   - Stock comes live from your Google Sheet: "ONLY N LEFT!", **SOLD OUT** and **NOT AVAILABLE**.
+   - Navratri thalis show "OPENS …" or "CLOSED" outside their ordering window.
+2. **Item page**: photos and dish list. Required choices (weight / box size) and add-ons, with live prices.
+3. **Your Order**: quantities, bill (sub total, delivery, GST) and cart rules:
+   - one thali day per order;
+   - a thali and mithai go together only if both can be delivered that day.
+4. **Delivery address**: search, move the map pin, or use current location (OpenStreetMap; no API key).
+   - Anywhere outside Delhi NCR / Gurgaon shows "Sorry, we are not currently delivering near your location."
+5. **Checkout**:
+   - Delivery date and slot from 10 AM. Before 6 PM → next day; after 6 PM → the day after. Thalis only on their day.
+   - Contact details, then UPI or cash on delivery.
+6. **Order received**: "Confirm order on WhatsApp" (full order text and map link) and "Pay with UPI".
 
-## Make it yours
+## Where things live
 
 | What | Where |
 | --- | --- |
-| Shop name, WhatsApp number, UPI ID, phone, where the map starts | `js/config.js` |
-| Delivery fee, free-delivery limit, minimum order, GST | `js/config.js` |
-| Areas you deliver to (`deliveryAreas`) | `js/config.js` |
-| The Navratri banner | `js/config.js` |
-| Earliest and latest pre-order day, 6 PM order cut-off, slot timings (from 10 AM) | `js/config.js` |
-| Which items are on sale, names, prices, categories, **stock**, available on/off | your Google Sheet ([backend/SETUP.md](backend/SETUP.md)) |
-| Sizes/weights, add-ons, emoji for each item | `js/menu.js` |
-| Google Sheet link (`backendUrl`) and the low-stock number (`lowStockAt`) | `js/config.js` |
-| Colours (maroon theme) and fonts | top of `css/style.css` |
+| Shop name, WhatsApp, UPI ID, phone, charges, slots, cut-off, delivery areas | `data/config.ts` |
+| Menu: items, prices, sizes, add-ons, photos, shelf life, Navratri thalis | `data/menu.ts` |
+| Photos | `public/images/` (refer to them as `images/name.webp`) |
+| Colours and layout | `app/globals.css` |
+| Google Sheet stock and orders | `backend/` (see `backend/SETUP.md`) |
+| Pages | `app/` (`/`, `/item/<id>/`, `/cart/`, `/checkout/`, `/order/?id=…`) |
+| Screens | `components/` |
+| Business rules (prices, dates, thali windows, cart, delivery area) | `lib/` |
+| Tests | `tests/` |
 
-### Adding photos
-Put photos in an `images/` folder and list them on the item in `js/menu.js`:
+## Run it on your computer
 
-```js
-images: ["images/besan-laddu.webp", "images/besan-laddu-box.jpg"],
-```
-
-The first photo shows on the menu card. The item page shows all of them with thumbnails.
-Items without photos show their emoji on a coloured tile.
-
-### Inventory and orders in a Google Sheet
-Follow [backend/SETUP.md](backend/SETUP.md) once (about 10 minutes). After that:
-- **Shop window:** the Sheet's **Inventory** tab decides what's on sale.
-- **Stock goes down automatically** with every order.
-- **Order log:** each order is added to the **Orders** tab.
-
-Until `backendUrl` is set, the site uses the items in `js/menu.js` as-is.
-
-## Run it locally
+Needs Node.js 22.
 
 ```bash
-python3 -m http.server 8000
-# open http://localhost:8000
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-## Put it online (free)
-- **GitHub Pages**: repo **Settings → Pages → Deploy from a branch**, pick the branch and `/ (root)`.
-- **Netlify / Vercel**: drag and drop the folder, or connect the repo. There is nothing to build.
+Checks (the same ones GitHub runs):
 
-## Navratri thalis
-The **Navratri Thalis** section lists one thali per day of Navratri. All 9 are always visible, but:
-- **Delivery:** each thali is delivered only on its own day (Day 1 on 11 Oct … Day 9 on 19 Oct).
-- **Ordering:** Day 1 can be pre-ordered from 7 Oct (`DAY_1_ORDERS_OPEN`). Days 2–9 open the day before their day (Day 2 on 11 Oct, Day 3 on 12 Oct, and so on), and each stays open on the day itself for slots at least 2 hours away. Outside that window the button reads "OPENS …" or "CLOSED".
-- **Visibility:** all nine stay on the menu until 19 Oct (`THALIS_SHOWN_UNTIL`). From 20 Oct the section, its banner and its menu entry disappear.
-- **Mixed carts:** a cart can't mix thalis for different days. A thali plus mithai goes out together on the thali's day, if the mithai can be delivered that day.
-- **Price:** ₹750 per thali (`THALI_PRICE` in `js/menu.js`, or the Sheet's price column, which takes priority). Leaving it blank shows "Price coming soon" and stops orders.
-- **Dates and window:** change the dates with `NAVRATRI_DAY_1` in `js/menu.js`, and the window with `thaliOrderDaysBefore` / `sameDayPrepHours` in `js/config.js`.
+```bash
+npm run lint
+npm run typecheck
+npm test           # business rules + Google Sheet script
+npm run build      # writes the finished site to out/
+```
 
-## Delivery area
-`deliveryAreas` in `js/config.js` lists the places you deliver to:
-Delhi, New Delhi, Gurugram/Gurgaon, Noida, Greater Noida, Ghaziabad and Faridabad.
-The site checks the state, district and city of the address the customer picks, so a street called "Delhi Road" in another city doesn't count.
-To deliver only to Delhi and Gurgaon, remove the Noida, Ghaziabad and Faridabad lines.
+## Publish it (GitHub Pages)
 
-## Things to know
-- **Payments**: UPI links go straight to your UPI ID, so check the payment against the order ID.
-  To take card/UPI payments automatically you would need a gateway such as Razorpay or Cashfree, plus a small server.
-- **Order records**: orders reach you on WhatsApp. Once the Sheet is connected, they also go into its Orders tab.
-- **Address search** uses OpenStreetMap's free Nominatim service. That's fine for a small shop.
-  If you get a lot of traffic, switch to a paid geocoding provider.
+1. **Turn on Pages:** in the GitHub repo, go to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**.
+2. **Publish:** push to `main`. The **Deploy to GitHub Pages** workflow runs the checks, builds the site and publishes it. It takes about 2 minutes.
+   - It works both at `https://<owner>.github.io/<repo>/` and on a custom domain (the sub-path is detected automatically).
+
+### Use orders.marwadikhana.com
+
+Do the DNS step first. The site isn't reachable on the new address until the DNS points at GitHub.
+
+1. **DNS:** at your domain provider, add a record:
+
+   | Type | Name / Host | Value |
+   | --- | --- | --- |
+   | CNAME | `orders` | `<owner>.github.io` (the GitHub account or organisation that owns this repo, e.g. `fifthelephant.github.io`) |
+
+2. **Custom domain:** after 10–30 minutes, go to **Settings → Pages → Custom domain**, enter `orders.marwadikhana.com` and click **Save**.
+3. **HTTPS:** tick **Enforce HTTPS** once it becomes available.
+
+### Connect the Google Sheet
+
+Follow `backend/SETUP.md`. Then add the Sheet's web-app URL as a repository variable called **`SHEET_URL`** (**Settings → Secrets and variables → Actions → Variables**) and re-run the deploy workflow.
+Or paste it into `SHEET_URL` at the top of `data/config.ts`.
+
+## Good to know
+
+- **Saved carts carry over:** customers keep their cart, address and details from the old site (same browser storage keys).
+  Old links like `…/#/item/besan-laddu` redirect to the new pages.
+- **Items added only in the Google Sheet** (with no entry in `data/menu.ts`) still show on the menu and open at `/item/?id=…`.
+  Add them to `data/menu.ts` to give them sizes, emoji and their own page.
+- **Time-based parts are worked out in the customer's browser**, so they're always current: the 6 PM cut-off, thali "OPENS / CLOSED", slots and stock.
+  The pre-built HTML shows a short "Loading today's menu…" while this happens.
+- **Payments** go to your UPI ID by link; check payments against the order ID.
+  Automatic payment confirmation (Razorpay/Cashfree) would need a host with a server.
+- **Security audit:** `npm audit` reports a warning in a lint tool (`braces`, via `eslint-config-next`).
+  It's only used while developing and isn't part of the published site; `npm audit --omit=dev` is clean.
