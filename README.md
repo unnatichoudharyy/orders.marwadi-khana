@@ -1,13 +1,13 @@
 # Marwadi Khana: online ordering site
 
-A mobile-first **pre-order** website for Marwadi Khana (mithai, Navratri specials and combos).
+A mobile-first **pre-order** website for Marwadi Khana (mithai, Navratri thalis and combos).
 It is home delivery only, across Delhi NCR and Gurgaon.
 It uses plain HTML, CSS and JavaScript, with no build step and no server.
 You manage the menu and stock in a **Google Sheet** (see [backend/SETUP.md](backend/SETUP.md)).
 
 ## What customers can do
 
-1. **Menu**: browse collapsible categories. The **Menu** button jumps to a category. Customers can search and filter (vrat friendly, popular, under ₹500). Cards show "ONLY N LEFT!" when stock is low, and are greyed out as SOLD OUT or NOT AVAILABLE when they can't be ordered. Stock comes live from your Google Sheet.
+1. **Menu**: browse collapsible categories. The **Menu** button jumps to a category. Customers can search and filter (Navratri, popular, under ₹500). Cards show "ONLY N LEFT!" when stock is low, and are greyed out as SOLD OUT or NOT AVAILABLE when they can't be ordered. Stock comes live from your Google Sheet.
 2. **Item page**: pick a required option (weight, type, number of kanyas) and optional add-ons (gift wrap, card…) with live pricing. After adding, the button changes to **Go to cart**.
 3. **Your Order**: change quantities and see the bill (sub total, delivery charges, GST, to pay).
 4. **Delivery address**: search a place, move the map pin, or use current location. The map uses OpenStreetMap, so no API key is needed.

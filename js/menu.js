@@ -28,14 +28,6 @@
 //   shelfLife optional, e.g. "7 days" — shown on the card and item page
 // ---------------------------------------------------------------------------
 
-const WEIGHT = (half, kg) => ({
-  name: "Select weight", required: true, max: 1, choices: [
-    { label: "250 g", price: 0 },
-    { label: "500 g", price: half },
-    { label: "1 kg", price: kg }
-  ]
-});
-
 // Laddus are priced per kg; a 1 kg box holds about 24, so each box is priced
 // by its share of a kg (box of 4 = 4/24 of the per-kg price).
 // Halwa and burfi are priced per kg; 500 g is half the per-kg price.
@@ -191,58 +183,6 @@ window.MENU = [
     name: "Navratri Thalis",
     subtitle: "A different thali for each day of Navratri, delivered only on its day · order the day before or on the day",
     items: NAVRATRI_THALIS
-  },
-  {
-    id: "navratri",
-    name: "Navratri Specials",
-    subtitle: "Vrat-friendly · no grains, onion or garlic · made with sendha namak",
-    items: [
-      {
-        id: "singhara-barfi",
-        name: "Singhare ki Barfi",
-        desc: "Water-chestnut flour slow-roasted in desi ghee with khoya and cardamom. Perfect for the vrat.",
-        price: 220, veg: true, emoji: "🟫", badge: "VRAT FRIENDLY", stock: 8,
-        options: [WEIGHT(200, 600)]
-      },
-      {
-        id: "rajgira-laddoo",
-        name: "Rajgira Laddoo",
-        desc: "Puffed amaranth bound with jaggery and ghee. Light, crunchy and vrat-safe.",
-        price: 180, veg: true, emoji: "🟡", badge: "VRAT FRIENDLY",
-        options: [WEIGHT(160, 500)]
-      },
-      {
-        id: "makhana-kheer",
-        name: "Kesar Makhana Kheer",
-        desc: "Roasted fox nuts simmered in full-cream milk with saffron and dry fruits. 400 ml tub.",
-        price: 249, veg: true, emoji: "🥣", badge: "POPULAR"
-      },
-      {
-        id: "sabudana-vada",
-        name: "Sabudana Vada (6 pcs)",
-        desc: "Crisp sago and potato vadas with peanuts, served with vrat-wali hari chutney.",
-        price: 199, veg: true, emoji: "🧆"
-      },
-      {
-        id: "kuttu-pakode",
-        name: "Kuttu Aloo Pakode",
-        desc: "Buckwheat-batter potato fritters fried in groundnut oil. 250 g.",
-        price: 169, veg: true, emoji: "🥔"
-      },
-      {
-        id: "vrat-namkeen",
-        name: "Vrat Aloo Lachha Namkeen",
-        desc: "Crunchy potato sticks with peanuts, kishmish and sendha namak.",
-        price: 149, veg: true, emoji: "🥜",
-        options: [WEIGHT(130, 400)]
-      },
-      {
-        id: "lauki-halwa",
-        name: "Lauki ka Halwa",
-        desc: "Bottle gourd cooked in milk and ghee, topped with pista. 500 g box.",
-        price: 299, veg: true, emoji: "🟢", stock: 5
-      }
-    ]
   },
   {
     id: "halwa",
