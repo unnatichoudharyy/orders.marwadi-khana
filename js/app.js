@@ -144,7 +144,7 @@
   function orderWindow(item) {
     if (!item.deliveryDate) return null;
     const deliver = parseDay(item.deliveryDate);
-    const opens = addDays(deliver, -S.thaliOrderDaysBefore);
+    const opens = item.orderFrom ? parseDay(item.orderFrom) : addDays(deliver, -S.thaliOrderDaysBefore);
     const today = startOfDay(new Date());
     let status;
     if (today < opens) status = "upcoming";
@@ -154,7 +154,9 @@
     return { deliver, opens, status };
   }
   const hasPrice = (item) => typeof item.price === "number";
-  const orderable = (item) => !!item && !item.soldOut && hasPrice(item) && (!item.deliveryDate || orderWindow(item).status === "open");
+  // Seasonal items (the thalis) leave the menu after their visibleUntil date.
+  const isRetired = (item) => !!item.visibleUntil && startOfDay(new Date()) > parseDay(item.visibleUntil);
+  const orderable = (item) => !!item && !isRetired(item) && !item.soldOut && hasPrice(item) && (!item.deliveryDate || orderWindow(item).status === "open");
 
   // Why an item can't be ordered right now, for buttons ("" if it can).
   function blockedLabel(item, long) {
@@ -336,7 +338,7 @@
       const notes = reconcileCart();
       if (notes.length) { state.cartNotice = notes.join(" "); if (page !== "cart" && page !== "checkout") toast(notes[0]); }
     }
-    if (page === "item" && ITEMS[arg]) renderItem(ITEMS[arg]);
+    if (page === "item" && ITEMS[arg] && !isRetired(ITEMS[arg])) renderItem(ITEMS[arg]);
     else if (page === "cart") renderCart();
     else if (page === "checkout") renderCheckout();
     else if (page === "order") renderDone(arg);
@@ -404,7 +406,7 @@
   function renderMenu() {
     document.title = `${S.name} · Order Mithai Online`;
     const f = state.filters;
-    const cats = CATALOG.map((cat) => ({ ...cat, list: cat.items.filter(matches) }))
+    const cats = CATALOG.map((cat) => ({ ...cat, list: cat.items.filter((i) => !isRetired(i) && matches(i)) }))
       .filter((c) => c.list.length);
     const filtering = f.q || f.vrat || f.popular || f.under500;
 
@@ -427,7 +429,7 @@
         <button class="chip${f.popular ? " on" : ""}" data-filter="popular">⭐ Popular</button>
         <button class="chip${f.under500 ? " on" : ""}" data-filter="under500">Under ${S.currency}500</button>
       </div>
-      ${S.banner && !filtering ? `<section class="banner">
+      ${S.banner && !filtering && cats.some((c) => c.id === S.banner.category) ? `<section class="banner">
         <h3>${esc(S.banner.title)}</h3><p>${esc(S.banner.text)}</p>
         <button data-jump="${esc(S.banner.category)}">${esc(S.banner.cta)} →</button>
       </section>` : ""}
@@ -552,7 +554,10 @@
     const pop = document.createElement("div");
     pop.className = "cat-pop";
     pop.setAttribute("role", "menu");
-    pop.innerHTML = CATALOG.map((c) => `<button role="menuitem" data-cat="${c.id}"><span>${esc(c.name)}</span><span>${c.items.length}</span></button>`).join("");
+    pop.innerHTML = CATALOG
+      .map((c) => ({ ...c, n: c.items.filter((i) => !isRetired(i)).length }))
+      .filter((c) => c.n)
+      .map((c) => `<button role="menuitem" data-cat="${c.id}"><span>${esc(c.name)}</span><span>${c.n}</span></button>`).join("");
     const close = () => { scrim.remove(); pop.remove(); };
     scrim.onclick = close;
     pop.onclick = (e) => { const b = e.target.closest("[data-cat]"); if (b) { close(); jumpTo(b.dataset.cat); } };
