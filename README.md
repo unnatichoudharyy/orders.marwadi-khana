@@ -58,6 +58,14 @@ python3 -m http.server 8000
 - **GitHub Pages**: repo **Settings → Pages → Deploy from a branch**, pick the branch and `/ (root)`.
 - **Netlify / Vercel**: drag and drop the folder, or connect the repo. There is nothing to build.
 
+## Navratri thalis
+The **Navratri Thalis** section lists one thali per day of Navratri. All 9 are always visible, but:
+- **Delivery:** each thali is delivered only on its own day (Day 1 on 11 Oct … Day 9 on 19 Oct).
+- **Ordering:** each thali can be ordered the day before or on the day itself. On the day, only slots at least 2 hours away are offered. Outside that window its button reads "OPENS …" or "CLOSED".
+- **Mixed carts:** a cart can't mix thalis for different days. A thali plus mithai goes out together on the thali's day, if the mithai can be delivered that day.
+- **Price:** set the price in the Sheet's price column (or `THALI_PRICE` in `js/menu.js`). Until then the thalis show "Price coming soon" and can't be ordered.
+- **Dates and window:** change the dates with `NAVRATRI_DAY_1` in `js/menu.js`, and the window with `thaliOrderDaysBefore` / `sameDayPrepHours` in `js/config.js`.
+
 ## Delivery area
 `deliveryAreas` in `js/config.js` lists the places you deliver to:
 Delhi, New Delhi, Gurugram/Gurgaon, Noida, Greater Noida, Ghaziabad and Faridabad.

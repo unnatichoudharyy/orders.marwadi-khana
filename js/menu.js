@@ -20,6 +20,9 @@
 //             price on a choice is added to the base price;
 //             factor on a choice scales it (e.g. factor: 0.5 for half a kg)
 //   unit      optional, shown after the price: "kg" → "1,500 / kg"
+//   deliveryDate  optional "YYYY-MM-DD": item is delivered only on that day
+//             and can be ordered only shortly before (see config)
+//   includes  optional list shown on the item page ("What's in it")
 //   shelfLife optional, e.g. "7 days" — shown on the card and item page
 // ---------------------------------------------------------------------------
 
@@ -58,7 +61,129 @@ const GIFTING = {
   ]
 };
 
+// ---------------------------------------------------------------------------
+// Navratri thalis: one thali per day of Navratri. Each is delivered only on
+// its own day, and can be ordered the day before or on the day itself
+// (see thaliOrderDaysBefore in js/config.js).
+// ---------------------------------------------------------------------------
+const NAVRATRI_DAY_1 = "2026-10-11";   // date of Day 1 (YYYY-MM-DD)
+const THALI_PRICE = null;              // ₹ per thali — null shows "Price coming soon"
+
+function navratriThali(day, name, includes) {
+  const d = new Date(NAVRATRI_DAY_1 + "T00:00:00");
+  d.setDate(d.getDate() + day - 1);
+  const iso = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  return {
+    id: `navratri-thali-day-${day}`,
+    name,
+    desc: includes.join(" · "),
+    includes,
+    price: THALI_PRICE,
+    deliveryDate: iso,
+    veg: true,
+    emoji: "🍱"
+  };
+}
+
+const NAVRATRI_THALIS = [
+  navratriThali(1, "Navratri Thali · Day 1", [
+    "Akhrot Arbi Tikki – 2",
+    "Aloo Anar Chaat",
+    "Paneer Mircha Sabji",
+    "Dahi Wali Arbi",
+    "Kuttu Puri – 5",
+    "Makhana Kheer",
+    "Sabudana Papad – 1",
+    "Green Chutney + Mukhwas"
+  ]),
+  navratriThali(2, "Navratri Thali · Day 2", [
+    "Kaccha Kela Tikki – 2",
+    "Shakarkandi Chaat",
+    "Angoor Makhana Sabji",
+    "Aloo Tamatar Sabji",
+    "Kuttu Paratha – 3",
+    "Aloo Halwa",
+    "Sabudana Papad – 1",
+    "Green Chutney + Mukhwas"
+  ]),
+  navratriThali(3, "Navratri Thali · Day 3", [
+    "Sabudana Tikki – 2",
+    "Fruit & Anar Chaat",
+    "Kele Kofta Curry",
+    "Paneer Makhana Sabji",
+    "Kuttu Puri – 5",
+    "Nariyal Laddu – 1",
+    "Sabudana Papad – 1",
+    "Green Chutney + Mukhwas"
+  ]),
+  navratriThali(4, "Navratri Thali · Day 4", [
+    "Kacche Kele Badam Tikki – 2",
+    "Aloo Anar Raita",
+    "Sukhi Arbi",
+    "Dahi Wale Aloo",
+    "Kuttu Paratha – 3",
+    "Sabudana Kheer",
+    "Sabudana Papad – 1",
+    "Green Chutney + Mukhwas"
+  ]),
+  navratriThali(5, "Navratri Thali · Day 5", [
+    "Arbi Walnut Tikki – 2",
+    "Shakarkandi Chaat",
+    "Paneer Mircha Sabji",
+    "Vrat Wale Aloo Tamatar",
+    "Kuttu Puri – 5",
+    "Aloo Ka Halwa",
+    "Sabudana Papad – 1",
+    "Green Chutney + Mukhwas"
+  ]),
+  navratriThali(6, "Navratri Thali · Day 6", [
+    "Sabudana Khichdi",
+    "Fruit Chaat",
+    "Dahi Wale Aloo",
+    "Hari Chutney Paneer",
+    "Kuttu Paratha – 3",
+    "Nariyal Laddu – 1",
+    "Sabudana Papad – 1",
+    "Green Chutney + Mukhwas"
+  ]),
+  navratriThali(7, "Navratri Thali · Day 7", [
+    "Kacche Kele Ka Kofta – 2",
+    "Aloo Anar Raita",
+    "Makhana Kaju Curry",
+    "Sukhi Arbi",
+    "Kuttu Puri – 5",
+    "Samak Rice Kheer",
+    "Sabudana Papad – 1",
+    "Green Chutney + Mukhwas"
+  ]),
+  navratriThali(8, "Navratri Thali · Day 8", [
+    "Kaccha Kela Peanut Tikki – 2",
+    "Shakarkandi Anar Chaat",
+    "Paneer Anardana Sabji",
+    "Dahi Wale Aloo",
+    "Kuttu Paratha – 3",
+    "Nariyal Burfi – 1",
+    "Sabudana Papad – 1",
+    "Green Chutney + Mukhwas"
+  ]),
+  navratriThali(9, "Navratri Thali · Day 9 (Navratri Finale) 🌸", [
+    "Kala Chana",
+    "Jhol Ke Aloo",
+    "Poori",
+    "Chawal Ki Kheer",
+    "Sooji Halwa",
+    "Sabudana Papad – 1",
+    "Green Chutney + Mukhwas"
+  ])
+];
+
 window.MENU = [
+  {
+    id: "navratri-thali",
+    name: "Navratri Thalis",
+    subtitle: "A different thali for each day of Navratri, delivered only on its day · order the day before or on the day",
+    items: NAVRATRI_THALIS
+  },
   {
     id: "navratri",
     name: "Navratri Specials",

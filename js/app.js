@@ -55,7 +55,7 @@
           id: row.id,
           name: row.name || b.name || row.id,
           desc: row.description || b.desc || "",
-          price: typeof row.price === "number" ? row.price : (b.price || 0),
+          price: typeof row.price === "number" ? row.price : (b.price ?? null),
           badge: row.badge || b.badge || "",
           shelfLife: row.shelf_life || b.shelfLife || "",
           // The Sheet's image column can hold one link or several, separated by commas.
@@ -113,6 +113,69 @@
   const soldOutLabel = (item) => (item.unavailable ? "NOT AVAILABLE" : "SOLD OUT");
 
   // ---------------------------------------------------------------------------
+  // Dates, delivery slots and fixed-day items (the Navratri thalis)
+  // ---------------------------------------------------------------------------
+  const startOfDay = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+  const parseDay = (iso) => { const [y, m, d] = iso.split("-").map(Number); return new Date(y, m - 1, d); };
+  const sameDay = (a, b) => startOfDay(a).getTime() === startOfDay(b).getTime();
+  const fmtDay = (d) => d.toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" });
+  const fmtDate = (d) => d.toLocaleDateString("en-IN", { day: "numeric", month: "short" });
+  const sameDayEarliest = () => new Date(Date.now() + S.sameDayPrepHours * 3600000);
+
+  // Delivery slots on one day, e.g. "10:00 – 11:30 AM". Slots starting before
+  // `earliest` (same-day orders need prep time) are left out.
+  function slotsOn(day, earliest) {
+    const hm = (d) => `${d.getHours() % 12 || 12}:${String(d.getMinutes()).padStart(2, "0")}`;
+    const ap = (d) => (d.getHours() < 12 ? "AM" : "PM");
+    const range = (a, b) => (ap(a) === ap(b) ? `${hm(a)} – ${hm(b)} ${ap(b)}` : `${hm(a)} ${ap(a)} – ${hm(b)} ${ap(b)}`);
+    const out = [];
+    for (let h = S.openHour; h + S.slotHours <= S.closeHour + 1e-9; h += S.slotHours) {
+      const start = new Date(day); start.setHours(Math.floor(h), Math.round((h % 1) * 60), 0, 0);
+      if (earliest && start < earliest) continue;
+      out.push(range(start, new Date(start.getTime() + S.slotHours * 3600000)));
+    }
+    return out;
+  }
+
+  // For an item delivered on one fixed day: when can it be ordered?
+  // "upcoming" before its window opens, "open" from thaliOrderDaysBefore days
+  // before until its last same-day slot is too close, then "closed".
+  function orderWindow(item) {
+    if (!item.deliveryDate) return null;
+    const deliver = parseDay(item.deliveryDate);
+    const opens = addDays(deliver, -S.thaliOrderDaysBefore);
+    const today = startOfDay(new Date());
+    let status;
+    if (today < opens) status = "upcoming";
+    else if (today < deliver) status = "open";
+    else if (sameDay(today, deliver) && slotsOn(deliver, sameDayEarliest()).length) status = "open";
+    else status = "closed";
+    return { deliver, opens, status };
+  }
+  const hasPrice = (item) => typeof item.price === "number";
+  const orderable = (item) => !!item && !item.soldOut && hasPrice(item) && (!item.deliveryDate || orderWindow(item).status === "open");
+
+  // Why an item can't be ordered right now, for buttons ("" if it can).
+  function blockedLabel(item, long) {
+    if (!hasPrice(item)) return long ? "Price coming soon" : "COMING SOON";
+    if (item.soldOut) return long ? (item.unavailable ? "Not available right now" : "Sold out") : soldOutLabel(item);
+    const w = orderWindow(item);
+    if (w && w.status === "upcoming") return long ? `Orders open on ${fmtDay(w.opens)}` : `OPENS ${fmtDate(w.opens).toUpperCase()}`;
+    if (w && w.status === "closed") return long ? "Ordering has closed for this day" : "CLOSED";
+    return "";
+  }
+  function whenNote(item) {
+    const w = orderWindow(item);
+    if (!w) return "";
+    const range = sameDay(w.opens, w.deliver) ? fmtDate(w.deliver) : `${fmtDate(w.opens)}–${fmtDate(w.deliver)}`;
+    return `<p class="when">🗓️ Delivered on <b>${esc(fmtDay(w.deliver))}</b> · order ${esc(range)}</p>`;
+  }
+  const priceHTML = (item, decimals) => (hasPrice(item)
+    ? `${plain(item.price)}${decimals ? ".00" : ""}${priceNote(item)}`
+    : `<span class="tbd">Price coming soon</span>`);
+
+  // ---------------------------------------------------------------------------
   // Cart state
   // ---------------------------------------------------------------------------
   const state = {
@@ -133,8 +196,11 @@
     const used = {};
     state.cart = state.cart.filter((l) => {
       const item = ITEMS[l.id];
-      if (!item || item.soldOut) {
-        notes.push(`${item ? item.name : "An item"} is no longer available and was removed from your cart.`);
+      if (!orderable(item)) {
+        const w = item && orderWindow(item);
+        notes.push(w && w.status === "closed"
+          ? `Ordering for ${item.name} has closed, so it was removed from your cart.`
+          : `${item ? item.name : "An item"} is no longer available and was removed from your cart.`);
         return false;
       }
       if (hasStockLimit(item)) {
@@ -201,13 +267,16 @@
   // How many more of this item can go in the cart (Infinity when untracked).
   function roomFor(id) {
     const item = ITEMS[id];
-    if (!item || item.soldOut) return 0;
+    if (!orderable(item)) return 0;
     return hasStockLimit(item) ? Math.max(0, item.stock - qtyOfItem(id)) : Infinity;
   }
 
   function addToCart(id, sel, qty = 1) {
     const room = roomFor(id);
-    if (room <= 0) { toast(`Sorry, no more ${ITEMS[id] ? ITEMS[id].name : "of this item"} left`); return null; }
+    if (room <= 0) {
+      toast(ITEMS[id] && blockedLabel(ITEMS[id], true) || `Sorry, no more ${ITEMS[id] ? ITEMS[id].name : "of this item"} left`);
+      return null;
+    }
     if (qty > room) { toast(`Only ${ITEMS[id].stock} left in stock`); qty = room; }
     const key = lineKey(id, sel);
     const line = state.cart.find((l) => l.key === key);
@@ -263,6 +332,10 @@
     view.onkeydown = null;
 
     if (!catalogReady && page !== "order") return renderLoading();
+    if (page !== "order") {
+      const notes = reconcileCart();
+      if (notes.length) { state.cartNotice = notes.join(" "); if (page !== "cart" && page !== "checkout") toast(notes[0]); }
+    }
     if (page === "item" && ITEMS[arg]) renderItem(ITEMS[arg]);
     else if (page === "cart") renderCart();
     else if (page === "checkout") renderCheckout();
@@ -294,7 +367,7 @@
     }
     if (f.vrat && !(item.category === "navratri" || /vrat/i.test(item.badge || ""))) return false;
     if (f.popular && !/popular/i.test(item.badge || "")) return false;
-    if (f.under500 && minPrice(item) >= 500) return false;
+    if (f.under500 && (!hasPrice(item) || minPrice(item) >= 500)) return false;
     return true;
   }
 
@@ -302,14 +375,17 @@
     const q = qtyOfItem(item.id);
     const hasOpts = item.options && item.options.length;
     let action;
-    if (item.soldOut) action = `<button class="add" disabled>${soldOutLabel(item)}</button>`;
+    const blocked = blockedLabel(item);
+    if (blocked) action = `<button class="add" disabled>${blocked}</button>`;
     else if (!hasOpts && q > 0) {
       action = `<div class="stepper" data-stop>
         <button data-dec="${item.id}" aria-label="Remove one">−</button><span>${q}</span><button data-inc="${item.id}" aria-label="Add one"${roomFor(item.id) > 0 ? "" : " disabled"}>+</button>
       </div>`;
     } else action = `<button class="add" data-add="${item.id}">${hasOpts ? "ADD+" : "ADD"}${hasOpts && q ? ` (${q})` : ""}</button>`;
 
-    return `<article class="item${item.soldOut ? " sold" : ""}" data-open="${item.id}" tabindex="0" role="link" aria-label="${esc(item.name)}">
+    const w = orderWindow(item);
+    const dim = item.soldOut || (w && w.status === "closed");
+    return `<article class="item${dim ? " sold" : ""}" data-open="${item.id}" tabindex="0" role="link" aria-label="${esc(item.name)}">
       <div class="thumb">
         ${itemVisual(item)}
         ${lowStock(item) && !item.soldOut ? `<span class="flag">ONLY ${item.stock} LEFT!</span>` : ""}
@@ -319,7 +395,8 @@
         <div class="name-row"><h3>${esc(item.name)}</h3>${vegMark(item)}</div>
         <p class="desc">${esc(item.desc)}</p>
         ${shelfLifeNote(item)}
-        <div class="buy"><span class="price">${plain(item.price)}${priceNote(item)}</span>${action}</div>
+        ${whenNote(item)}
+        <div class="buy"><span class="price">${priceHTML(item)}</span>${action}</div>
       </div>
     </article>`;
   }
@@ -504,9 +581,11 @@
         </div>
         <div class="detail">
           ${item.badge ? `<span class="tag ${badgeClass(item.badge)}">${esc(item.badge)}</span>` : ""}
-          <div class="detail-head">${vegMark(item)}<h1>${esc(item.name)}</h1><span class="price">${plain(item.price)}.00${priceNote(item)}</span></div>
+          <div class="detail-head">${vegMark(item)}<h1>${esc(item.name)}</h1><span class="price">${priceHTML(item, true)}</span></div>
           ${shelfLifeNote(item)}
-          <p class="desc-full">${esc(item.desc)}${lowStock(item) && !item.soldOut ? `<br><strong style="color:var(--danger)">Only ${item.stock} left!</strong>` : ""}${item.soldOut ? `<br><strong style="color:var(--danger)">${item.unavailable ? "Not available right now" : "Sold out"}</strong>` : ""}</p>
+          ${whenNote(item)}
+          <p class="desc-full">${item.includes ? "" : esc(item.desc)}${lowStock(item) && !item.soldOut ? `<br><strong style="color:var(--danger)">Only ${item.stock} left!</strong>` : ""}${item.soldOut ? `<br><strong style="color:var(--danger)">${item.unavailable ? "Not available right now" : "Sold out"}</strong>` : ""}</p>
+          ${item.includes ? `<div class="includes"><h3>What's in the thali</h3><ul>${item.includes.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>` : ""}
           <form id="optForm">
             ${groups.map((g, gi) => `
               <fieldset class="group" data-group="${gi}">
@@ -528,8 +607,9 @@
     const foot = $("#itemFoot");
 
     function drawFoot() {
-      if (item.soldOut) {
-        foot.innerHTML = `<button class="btn primary" disabled>${item.unavailable ? "Not available right now" : "Sold out"}</button>`;
+      const blocked = blockedLabel(item, true);
+      if (blocked) {
+        foot.innerHTML = `<button class="btn primary" disabled>${esc(blocked)}</button>`;
         return;
       }
       if (!addedKey && roomFor(item.id) <= 0) {
@@ -642,6 +722,7 @@
     }
     const t = totals();
     const freeGap = S.freeDeliveryAbove && t.sub < S.freeDeliveryAbove ? S.freeDeliveryAbove - t.sub : 0;
+    const plan = deliveryPlan();
 
     view.innerHTML = `
       <div class="page">
@@ -660,10 +741,12 @@
         ${billHTML(t)}
         ${freeGap ? `<p class="note">Add ${money(freeGap)} more for FREE delivery.</p>` : ""}
         ${t.belowMin ? `<p class="note">Minimum order for delivery is ${money(S.minOrder)}.</p>` : ""}
+        ${plan.error ? `<p class="notice" role="alert">${esc(plan.error)}</p>`
+          : plan.fixed ? `<p class="note thali-note">🍱 This order will be delivered on <b>${esc(fmtDay(plan.fixed))}</b>, your thali's day.</p>` : ""}
       </div>
       <div class="sticky-foot pay-foot"><div class="inner">
         <div class="topay"><span>To Pay</span><span>${money(t.total)}</span></div>
-        <button class="btn primary block" id="proceed" ${t.belowMin ? "disabled" : ""}>Proceed</button>
+        <button class="btn primary block" id="proceed" ${t.belowMin || plan.error ? "disabled" : ""}>Proceed</button>
       </div></div>`;
 
     view.onclick = (e) => {
@@ -686,30 +769,43 @@
   const pastCutoff = () => new Date().getHours() >= S.orderCutoffHour;
   const hourLabel = (h) => `${h % 12 || 12} ${h < 12 ? "AM" : "PM"}`;
 
-  function buildSlots() {
-    const days = [];
-    const now = new Date();
-    const hm = (d) => `${d.getHours() % 12 || 12}:${String(d.getMinutes()).padStart(2, "0")}`;
-    const ap = (d) => (d.getHours() < 12 ? "AM" : "PM");
-    // "9:00 – 10:30 AM", or "11:30 AM – 1:00 PM" when the slot crosses noon.
-    const range = (a, b) => (ap(a) === ap(b) ? `${hm(a)} – ${hm(b)} ${ap(b)}` : `${hm(a)} ${ap(a)} – ${hm(b)} ${ap(b)}`);
-    // Pre-orders only: the first day offered is preorderMinDays from today,
-    // or one day later once today's order cut-off time has passed.
+  // Which days can this cart be delivered on?
+  // Regular items: from tomorrow (or the day after, past the 6 PM cut-off) for
+  // preorderMaxDays. A thali: only on its own day. Both together: the thali's
+  // day, if the regular items can make it too.
+  function regularDays() {
+    const today = startOfDay(new Date());
     const minDays = S.preorderMinDays + (pastCutoff() ? 1 : 0);
-    for (let d = minDays; d <= minDays + S.preorderMaxDays - S.preorderMinDays; d++) {
-      const day = new Date(now.getFullYear(), now.getMonth(), now.getDate() + d);
-      const slots = [];
-      for (let h = S.openHour; h + S.slotHours <= S.closeHour + 1e-9; h += S.slotHours) {
-        const start = new Date(day); start.setHours(Math.floor(h), Math.round((h % 1) * 60), 0, 0);
-        const end = new Date(start.getTime() + S.slotHours * 3600000);
-        slots.push(range(start, end));
-      }
-      if (slots.length) {
-        const date = day.toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" });
-        days.push({ label: date, slots });
-      }
+    const out = [];
+    for (let d = minDays; d <= minDays + S.preorderMaxDays - S.preorderMinDays; d++) out.push(addDays(today, d));
+    return out;
+  }
+  function deliveryPlan() {
+    const items = state.cart.map((l) => ITEMS[l.id]).filter(Boolean);
+    const fixed = [...new Set(items.map((i) => i.deliveryDate).filter(Boolean))];
+    const regular = items.filter((i) => !i.deliveryDate);
+    const regDays = regularDays();
+    if (fixed.length > 1) {
+      return { days: [], error: "Each Navratri thali is delivered on its own day, so thalis for different days need separate orders. Please keep one day's thali in your cart." };
     }
-    return days;
+    if (fixed.length === 1) {
+      const day = parseDay(fixed[0]);
+      if (regular.length && !regDays.some((d) => sameDay(d, day))) {
+        const names = [...new Set(regular.map((i) => i.name))].join(", ");
+        return {
+          days: [], fixed: day,
+          error: `Your thali is delivered on ${fmtDay(day)}, but ${names} can only be delivered from ${fmtDay(regDays[0])}. Please order them separately.`
+        };
+      }
+      return { days: [day], fixed: day, earliest: sameDay(day, new Date()) ? sameDayEarliest() : null };
+    }
+    return { days: regDays };
+  }
+
+  function buildSlots(plan = deliveryPlan()) {
+    return plan.days
+      .map((day) => ({ label: fmtDay(day), slots: slotsOn(day, plan.earliest) }))
+      .filter((d) => d.slots.length);
   }
 
   function renderCheckout() {
@@ -719,13 +815,15 @@
     if (t.belowMin) return go("#/cart");
     window.scrollTo(0, 0);
     const c = state.customer;
-    const days = buildSlots();
+    const plan = deliveryPlan();
+    if (plan.error) return go("#/cart");
+    const days = buildSlots(plan);
 
     view.innerHTML = `
       <form class="page" id="checkoutForm" novalidate>
         <div class="field">
           <span class="lbl">Delivery Date &amp; Slot <span class="req">*</span></span>
-          <p class="hint">Pre-orders placed before ${hourLabel(S.orderCutoffHour)} can be delivered ${S.preorderMinDays === 1 ? "the next day" : `in ${S.preorderMinDays} days`}.${pastCutoff() ? ` Today's ${hourLabel(S.orderCutoffHour)} cut-off has passed, so the earliest date is one day later.` : ""}</p>
+          ${plan.fixed ? `<p class="hint thali-hint">🍱 Your Navratri thali is delivered on <b>${esc(fmtDay(plan.fixed))}</b>. Pick a time slot.</p>` : `<p class="hint">Pre-orders placed before ${hourLabel(S.orderCutoffHour)} can be delivered ${S.preorderMinDays === 1 ? "the next day" : `in ${S.preorderMinDays} days`}.${pastCutoff() ? ` Today's ${hourLabel(S.orderCutoffHour)} cut-off has passed, so the earliest date is one day later.` : ""}</p>`}
           <div class="two">
             <select id="day" aria-label="Date">${days.map((d, i) => `<option value="${i}">${esc(d.label)}</option>`).join("")}</select>
             <select id="slot" aria-label="Time slot"></select>
@@ -813,7 +911,9 @@
       if (!days.length) { toast("No slots available right now. Please call us to order."); return; }
       // The 6 PM cut-off may have passed while the customer was filling the form.
       const chosen = days[Number(daySel.value)].label;
-      if (!buildSlots().some((d) => d.label === chosen)) {
+      const chosenSlot = slotSel.value;
+      const fresh = buildSlots();
+      if (!fresh.some((d) => d.label === chosen && d.slots.includes(chosenSlot))) {
         toast(`The ${hourLabel(S.orderCutoffHour)} cut-off has passed. Please pick a new delivery date.`);
         state.customer = { ...state.customer, name: v("name"), email: v("email"), phone: v("phone"), house: v("house"), landmark: v("landmark") };
         renderCheckout();
@@ -1203,7 +1303,6 @@
   if (!S.backendUrl) {
     buildCatalog(null);
     catalogReady = true;
-    reconcileCart();
     route();
   } else {
     // Show the last stock we saw straight away, then fetch the latest.
@@ -1211,7 +1310,6 @@
     if (Array.isArray(cached)) {
       buildCatalog(cached);
       catalogReady = true;
-      reconcileCart();
     }
     route();
     refreshInventory();

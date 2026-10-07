@@ -23,10 +23,10 @@ window.STORE = {
 
   // Promo banner at the top of the menu. Set to null to hide.
   banner: {
-    title: "Navratri pre-orders are open 🪔",
-    text: "Vrat-friendly mithai and namkeen made without grains, onion or garlic. Order now and pick your delivery date.",
-    cta: "See Navratri menu",
-    category: "navratri"
+    title: "9 days of Navratri Thalis 🪔",
+    text: "A different thali for every day of Navratri, from 11 Oct. Each thali is delivered on its day; order it the day before or on the day.",
+    cta: "See the thalis",
+    category: "navratri-thali"
   },
 
   // Pre-order delivery slots
@@ -34,6 +34,11 @@ window.STORE = {
   preorderMaxDays: 7,       // how many days ahead customers can choose
   orderCutoffHour: 18,      // orders placed at/after 6 PM skip one more day
                             // (after 6 PM today → earliest is the day after tomorrow)
+  // Items with a fixed delivery day (the Navratri thalis): they can be ordered
+  // from this many days before their day, up to the day itself as long as a
+  // delivery slot is still at least sameDayPrepHours away.
+  thaliOrderDaysBefore: 1,
+  sameDayPrepHours: 2,
   openHour: 10,             // first slot starts at 10:00
   closeHour: 21,            // last slot ends at 21:00
   slotHours: 1.5,           // slot length (e.g. 9:00 – 10:30 AM)
