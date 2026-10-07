@@ -22,6 +22,8 @@
 //   unit      optional, shown after the price: "kg" → "1,500 / kg"
 //   deliveryDate  optional "YYYY-MM-DD": item is delivered only on that day
 //             and can be ordered only shortly before (see config)
+//   orderFrom optional "YYYY-MM-DD": with deliveryDate, first day it can be ordered
+//   visibleUntil optional "YYYY-MM-DD": item is hidden from the day after
 //   includes  optional list shown on the item page ("What's in it")
 //   shelfLife optional, e.g. "7 days" — shown on the card and item page
 // ---------------------------------------------------------------------------
@@ -64,9 +66,12 @@ const GIFTING = {
 // ---------------------------------------------------------------------------
 // Navratri thalis: one thali per day of Navratri. Each is delivered only on
 // its own day, and can be ordered the day before or on the day itself
-// (see thaliOrderDaysBefore in js/config.js).
+// (see thaliOrderDaysBefore in js/config.js) — except Day 1, open from
+// DAY_1_ORDERS_OPEN. All nine stay on the menu until THALIS_SHOWN_UNTIL.
 // ---------------------------------------------------------------------------
 const NAVRATRI_DAY_1 = "2026-10-11";   // date of Day 1 (YYYY-MM-DD)
+const DAY_1_ORDERS_OPEN = "2026-10-07"; // Day 1 can be pre-ordered from this date
+const THALIS_SHOWN_UNTIL = "2026-10-19"; // the section disappears after this date
 const THALI_PRICE = null;              // ₹ per thali — null shows "Price coming soon"
 
 function navratriThali(day, name, includes) {
@@ -80,6 +85,9 @@ function navratriThali(day, name, includes) {
     includes,
     price: THALI_PRICE,
     deliveryDate: iso,
+    // Days 2–9 open the day before their delivery day; Day 1 opens early.
+    orderFrom: day === 1 ? DAY_1_ORDERS_OPEN : undefined,
+    visibleUntil: THALIS_SHOWN_UNTIL,
     veg: true,
     emoji: "🍱"
   };
