@@ -1,0 +1,32 @@
+id,name,category,description,price,stock,available,badge,image,shelf_life
+navratri-thali-day-1,Navratri Thali · Day 1,Navratri Thalis,Akhrot Arbi Tikki – 2 · Aloo Anar Chaat · Paneer Mircha Sabji · Dahi Wali Arbi · Kuttu Puri – 5 · Makhana Kheer · Sabudana Papad – 1 · Green Chutney + Mukhwas,750,25,TRUE,,images/navratri-thali-day-1.webp,
+navratri-thali-day-2,Navratri Thali · Day 2,Navratri Thalis,Kaccha Kela Tikki – 2 · Shakarkandi Chaat · Angoor Makhana Sabji · Aloo Tamatar Sabji · Kuttu Paratha – 3 · Aloo Halwa · Sabudana Papad – 1 · Green Chutney + Mukhwas,750,25,TRUE,,images/navratri-thali-day-2.webp,
+navratri-thali-day-3,Navratri Thali · Day 3,Navratri Thalis,Sabudana Tikki – 2 · Fruit & Anar Chaat · Kele Kofta Curry · Paneer Makhana Sabji · Kuttu Puri – 5 · Nariyal Laddu – 1 · Sabudana Papad – 1 · Green Chutney + Mukhwas,750,25,TRUE,,images/navratri-thali-day-3.webp,
+navratri-thali-day-4,Navratri Thali · Day 4,Navratri Thalis,Kacche Kele Badam Tikki – 2 · Aloo Anar Raita · Sukhi Arbi · Dahi Wale Aloo · Kuttu Paratha – 3 · Sabudana Kheer · Sabudana Papad – 1 · Green Chutney + Mukhwas,750,25,TRUE,,images/navratri-thali-day-4.webp,
+navratri-thali-day-5,Navratri Thali · Day 5,Navratri Thalis,Arbi Walnut Tikki – 2 · Shakarkandi Chaat · Paneer Mircha Sabji · Vrat Wale Aloo Tamatar · Kuttu Puri – 5 · Aloo Ka Halwa · Sabudana Papad – 1 · Green Chutney + Mukhwas,750,25,TRUE,,images/navratri-thali-day-5.webp,
+navratri-thali-day-6,Navratri Thali · Day 6,Navratri Thalis,Sabudana Khichdi · Fruit Chaat · Dahi Wale Aloo · Hari Chutney Paneer · Kuttu Paratha – 3 · Nariyal Laddu – 1 · Sabudana Papad – 1 · Green Chutney + Mukhwas,750,25,TRUE,,,
+navratri-thali-day-7,Navratri Thali · Day 7,Navratri Thalis,Kacche Kele Ka Kofta – 2 · Aloo Anar Raita · Makhana Kaju Curry · Sukhi Arbi · Kuttu Puri – 5 · Samak Rice Kheer · Sabudana Papad – 1 · Green Chutney + Mukhwas,750,25,TRUE,,,
+navratri-thali-day-8,Navratri Thali · Day 8,Navratri Thalis,Kaccha Kela Peanut Tikki – 2 · Shakarkandi Anar Chaat · Paneer Anardana Sabji · Dahi Wale Aloo · Kuttu Paratha – 3 · Nariyal Burfi – 1 · Sabudana Papad – 1 · Green Chutney + Mukhwas,750,25,TRUE,,,
+navratri-thali-day-9,Navratri Thali · Day 9 (Navratri Finale) 🌸,Navratri Thalis,Kala Chana · Jhol Ke Aloo · Poori · Chawal Ki Kheer · Sooji Halwa · Sabudana Papad – 1 · Green Chutney + Mukhwas,750,25,TRUE,,,
+besan-halwa,Besan Halwa,Halwa (Per Kg),Classic besan halwa. Priced per kg.,1500,25,TRUE,,images/besan-halwa.webp,5 days
+moong-dal-halwa,Moong Dal Halwa,Halwa (Per Kg),Traditional moong dal halwa. Priced per kg.,1500,25,TRUE,POPULAR,images/moong-dal-halwa.webp,5 days
+badam-halwa,Badam Halwa,Halwa (Per Kg),Rich almond halwa. Priced per kg.,2500,25,TRUE,,images/badam-halwa.webp,7 days
+walnut-halwa,Walnut Halwa,Halwa (Per Kg),Walnut halwa. Priced per kg.,3000,25,TRUE,,images/walnut-halwa.webp,7 days
+besan-halwa-jar,Besan Halwa Jar (300 g),Halwa Jars (300 g),Besan halwa in a 300 g jar.,425,25,TRUE,,images/besan-halwa-jar.webp,5 days
+moong-dal-halwa-jar,Moong Dal Halwa Jar (300 g),Halwa Jars (300 g),Moong dal halwa in a 300 g jar.,425,25,TRUE,,images/moong-dal-halwa-jar.webp,5 days
+badam-halwa-jar,Badam Halwa Jar (300 g),Halwa Jars (300 g),Badam halwa in a 300 g jar.,675,25,TRUE,,images/badam-halwa-jar.webp,7 days
+walnut-halwa-jar,Walnut Halwa Jar (300 g),Halwa Jars (300 g),Walnut halwa in a 300 g jar.,800,25,TRUE,,images/walnut-halwa-jar.webp,7 days
+besan-laddu,Besan Laddu,Laddus (Per Kg),Classic besan laddu.,1500,25,TRUE,POPULAR,images/besan-laddu.webp,15 days
+atta-laddu,Atta Laddu,Laddus (Per Kg),Whole-wheat atta laddu.,1500,25,TRUE,,images/atta-laddu.webp,15 days
+nariyal-laddu,Nariyal Laddu,Laddus (Per Kg),Coconut laddu.,1500,25,TRUE,,images/nariyal-laddu.webp,7 days
+moti-boondi-laddu,Moti Boondi Laddu,Laddus (Per Kg),Moti boondi laddu.,1500,25,TRUE,,images/moti-boondi-laddu.webp,3 days
+assorted-laddu-box,Assorted Laddu Box,Laddus (Per Kg),A mix of our laddus in one box.,1600,25,TRUE,,images/assorted-laddu-box.webp,7 days
+dry-fruit-laddu,Dry Fruit Laddu,Laddus (Per Kg),Dry fruit laddu.,2500,25,TRUE,,images/dry-fruit-laddu.webp,15 days
+besan-burfi,Besan Burfi,Burfi (Per Kg),Besan burfi. Priced per kg.,1500,25,TRUE,,images/besan-burfi.webp,7 days
+moong-dal-burfi,Moong Dal Burfi,Burfi (Per Kg),Moong dal burfi. Priced per kg.,1500,25,TRUE,,images/moong-dal-burfi.webp,7 days
+kalakand,Kalakand,Burfi (Per Kg),Milk-based kalakand. Priced per kg.,1800,25,TRUE,POPULAR,images/kalakand.webp,3–4 days
+mango-kalakand,Mango Kalakand,Burfi (Per Kg),Kalakand with mango. Priced per kg.,2000,25,TRUE,NEW,,
+navratri-vrat-combo,Navratri Vrat Combo,Combos & Gift Boxes,Singhare ki Barfi 250 g + Rajgira Laddoo 250 g + Vrat Namkeen 250 g + Makhana Kheer 400 ml.,749,9,TRUE,VRAT FRIENDLY,,
+kanya-pujan-box,Kanya Pujan Prasad Box,Combos & Gift Boxes,"Halwa, kala chana and puri prasad for Ashtami and Navami. Choose how many kanyas.",899,25,TRUE,POPULAR,,
+marwadi-sampler,Marwadi Mithai Sampler,Combos & Gift Boxes,"Besan Laddu (box of 8), Moong Dal Halwa jar (300 g) and Kalakand (250 g).",1199,25,TRUE,POPULAR,,
+dussehra-hamper,Festive Halwa & Laddu Hamper,Combos & Gift Boxes,"Badam Halwa jar, Walnut Halwa jar and a box of 12 Dry Fruit Laddus in a gift basket.",2499,25,TRUE,NEW,,
