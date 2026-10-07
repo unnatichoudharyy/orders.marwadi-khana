@@ -539,10 +539,13 @@
     }
     const sec = document.getElementById("cat-" + catId);
     if (!sec) {
-      // The category is hidden by filters — clear them and try again.
+      // No such section (e.g. removed from the menu): nothing to jump to.
+      if (!CATALOG.some((c) => c.id === catId)) return;
+      // The section is hidden by filters — clear them and try once more.
       state.filters = { q: "", vrat: false, popular: false, under500: false };
       renderMenu();
-      return jumpTo(catId);
+      if (document.getElementById("cat-" + catId)) jumpTo(catId);
+      return;
     }
     sec.classList.remove("collapsed");
     sec.scrollIntoView({ behavior: "smooth" });
