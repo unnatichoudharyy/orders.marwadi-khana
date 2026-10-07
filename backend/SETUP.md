@@ -43,13 +43,11 @@ You now have one row per item.
 
 ## 5. Tell the website
 
-Open `js/config.js` and paste the URL:
+Either:
+- **GitHub (no code change):** in the repo, go to **Settings → Secrets and variables → Actions → Variables → New repository variable**. Name it `SHEET_URL`, paste the URL as the value, then re-run the **Deploy to GitHub Pages** workflow (Actions tab → Run workflow).
+- **Or in code:** paste the URL into `SHEET_URL` at the top of `data/config.ts`, then commit and push.
 
-```js
-backendUrl: "https://script.google.com/macros/s/AKfy..../exec",
-```
-
-Save, commit and push. Done 🎉
+Done 🎉
 
 ---
 
@@ -57,10 +55,10 @@ Save, commit and push. Done 🎉
 
 | Column | What it does |
 | --- | --- |
-| **id** | Short unique name, e.g. `kaju-katli`. Don't change it once an item is live. It links the row to the item's sizes, add-ons and emoji in `js/menu.js`. |
+| **id** | Short unique name, e.g. `kaju-katli`. Don't change it once an item is live. It links the row to the item's sizes, add-ons and emoji in `data/menu.ts`. |
 | **name** | Name shown on the site. |
 | **category** | Section on the menu, e.g. *Navratri Specials*. Type a new name and a new section appears. |
-| **description** | Text under the name. Leave blank to use the one in `js/menu.js`. |
+| **description** | Text under the name. Leave blank to use the one in `data/menu.ts`. |
 | **price** | Starting price in ₹ (for the smallest size). |
 | **stock** | How many you can still sell. 10 or less shows "ONLY N LEFT!". **0 = SOLD OUT**. **Blank = unlimited**. |
 | **available** | Untick to switch an item off (it shows NOT AVAILABLE). |
@@ -68,7 +66,7 @@ Save, commit and push. Done 🎉
 | **shelf_life** | Optional, e.g. `7 days`. Shown as "🕒 Shelf life: 7 days" on the item. |
 | **image** | Optional photo link, e.g. `images/besan-halwa-jar.webp` or a full https link. For several photos (shown as a gallery on the item page), separate them with commas. |
 
-- **Add an item:** add a new row. Items with sizes or add-ons (like weights) also need an entry with the same `id` in `js/menu.js`. Items without one are sold as a single unit.
+- **Add an item:** add a new row. Items with sizes or add-ons (like weights) also need an entry with the same `id` in `data/menu.ts`. Items without one are sold as a single unit and don't get their own item page.
 - **Remove an item completely:** delete its row.
 - **Stock is counted per item, not per size:** an order of 2 × 500 g and 1 × 1 kg Kaju Katli uses 3 from Kaju Katli's stock.
 - **Orders tab:** each order is a new row with status *New*. You can change the status yourself (*Confirmed*, *Delivered*…). The website doesn't read this tab.
